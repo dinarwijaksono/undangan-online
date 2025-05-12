@@ -13,3 +13,4 @@ Route::get('/register', [AuthController::class, 'register']);
 
 // ManagementController
 Route::get('/main', [ManagementController::class, 'index']);
+Route::get('/main/my-invitation', [ManagementController::class, 'myInvitation']);

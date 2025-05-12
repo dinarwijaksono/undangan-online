@@ -28,15 +28,7 @@
     {{-- end navbar --}}
 
     <div class="flex gap-2 pt-16 min-h-[700px] -z-50">
-        <sidebar class="basis-2/12 py-4 px-2">
-            <ul class="menu rounded-box w-full">
-                <li><a class="btn btn-secondary mb-2">Beranda</a></li>
-                <li><a class="btn btn-secondary-content mb-2">Item 2</a></li>
-                <li><a class="btn btn-secondary-content mb-2">Item 3</a></li>
-                <li><a class="btn btn-secondary-content mb-2">Item 4</a></li>
-                <li><a class="btn btn-secondary-content mb-2">Item 5</a></li>
-            </ul>
-        </sidebar>
+        @livewire('components.sidebar')
 
         <main class="basis-10/12 px-4 bg-base-200 py-6">
             <h1 class="text-3xl mb-5">Beranda</h1>
