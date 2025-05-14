@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\ManagementController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,4 +14,7 @@ Route::get('/register', [AuthController::class, 'register']);
 
 // ManagementController
 Route::get('/main', [ManagementController::class, 'index']);
-Route::get('/main/my-invitation', [ManagementController::class, 'myInvitation']);
+
+// InvitationController
+Route::get('/invitation/my-invitation', [InvitationController::class, 'myInvitation']);
+Route::get('/invitation/create-invitation', [InvitationController::class, 'createInvitation']);

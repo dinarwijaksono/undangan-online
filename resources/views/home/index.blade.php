@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="fantasy" lang="en">
+<html data-theme="corporate" lang="en">
 
 <head>
     <meta charset="UTF-8">

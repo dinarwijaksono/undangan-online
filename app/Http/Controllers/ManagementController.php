@@ -10,9 +10,4 @@ class ManagementController extends Controller
     {
         return view('management.index');
     }
-
-    public function myInvitation()
-    {
-        return view('management.my-invitation');
-    }
 }
