@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\InvitationTemplateController;
 use App\Http\Controllers\ManagementController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,6 @@ Route::get('/main', [ManagementController::class, 'index']);
 // InvitationController
 Route::get('/invitation/my-invitation', [InvitationController::class, 'myInvitation']);
 Route::get('/invitation/create-invitation', [InvitationController::class, 'createInvitation']);
+
+// InvitationTemplateController
+Route::get('/invitation-template', [InvitationTemplateController::class, 'listTemplate']);
