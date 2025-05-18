@@ -21,7 +21,7 @@
         <div class="flex-none">
             <ul class="menu menu-horizontal px-1">
                 <li><a class="link link-secondary link-hover mr-2">Daftar sekarang</a></li>
-                <li><a class="btn btn-sm btn-secondary">Login</a></li>
+                <li><a class="btn btn-sm btn-primary">Login</a></li>
             </ul>
         </div>
     </nav>

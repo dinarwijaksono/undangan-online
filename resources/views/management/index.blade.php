@@ -4,15 +4,59 @@
     <main class="basis-10/12 px-4 bg-base-200 py-6">
         <h1 class="text-3xl mb-5">Beranda</h1>
 
-        <div role="alert" class="alert alert-error mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <div role="alert" class="alert alert-vertical bg-error mb-5 sm:alert-horizontal rounded-xl shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info h-6 w-6 shrink-0">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <span>Error! Task failed successfully.</span>
+            <div>
+                <h3 class="font-bold">New message!</h3>
+                <div class="text-xs">You have 1 unread message</div>
+            </div>
+            <button class="btn btn-sm btn-error">Tutup</button>
         </div>
 
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias eius deleniti consectetur vel,
-            necessitatibus quod ex ab temporibus magni incidunt.</p>
+        <section class="w-full bg-base-100 mb-5 p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl mb-5">Profile</h2>
+
+            <table class="table w-full">
+                <tbody>
+                    <tr>
+                        <td class="w-3/12">Nama</td>
+                        <td class="w-1/12 text-center">:</td>
+                        <td class="w-8/12">Dinar Wijaksono</td>
+                    </tr>
+
+                    <tr>
+                        <td>Email</td>
+                        <td class="text-center">:</td>
+                        <td>dinarwijaksono11@gmail.com</td>
+                    </tr>
+
+                    <tr>
+                        <td>Bergabung</td>
+                        <td class="text-center">:</td>
+                        <td>10 November 2025</td>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="stats w-full bg-base-100 shadow-lg rounded-xl justify-center flex">
+            <div class="stat basis-4/12 text-center">
+                <div class="stat-title font-bold">Total undangan dibuat</div>
+                <div class="stat-value">31K</div>
+            </div>
+
+            <div class="stat basis-4/12 text-center">
+                <div class="stat-title font-bold">Total undangan aktiv</div>
+                <div class="stat-value">4,200</div>
+            </div>
+
+            <div class="stat basis-4/12 text-center">
+                <div class="stat-title font-bold">Total Nonaktiv</div>
+                <div class="stat-value">1,200</div>
+            </div>
+        </section>
+
     </main>
 @endsection
