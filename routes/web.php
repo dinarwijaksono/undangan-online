@@ -22,3 +22,4 @@ Route::get('/invitation/create-invitation', [InvitationController::class, 'creat
 
 // InvitationTemplateController
 Route::get('/invitation-template', [InvitationTemplateController::class, 'listTemplate']);
+Route::get('/invitation-template/set-variabel', [InvitationTemplateController::class, 'setVariabel']);

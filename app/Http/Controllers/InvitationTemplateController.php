@@ -10,4 +10,9 @@ class InvitationTemplateController extends Controller
     {
         return view('invitation-template.list-template');
     }
+
+    public function setVariabel()
+    {
+        return view('invitation-template.set-variabel');
+    }
 }

@@ -3,7 +3,5 @@
         <li><a href="/main" class="btn btn-primary mb-2">Beranda</a></li>
         <li><a href="/invitation/my-invitation" class="btn btn-secondary-content mb-2">Undanganku</a></li>
         <li><a href="/invitation-template" class="btn btn-secondary-content mb-2">Templetku</a></li>
-        <li><a class="btn btn-secondary-content mb-2">Master Skema</a></li>
-        <li><a class="btn btn-secondary-content mb-2">Skema</a></li>
     </ul>
 </sidebar>
