@@ -1,0 +1,45 @@
+@startuml
+
+entity users {
+    * id INT <<PK>>
+    --
+    * email VARCHAR(100) UNIQUE
+    * name VARCHAR(100)
+    * created_at DATE
+    * updated_at DATE 
+}
+
+entity invitation {
+    * id INT <<PK>>
+    * user_id foregnId
+    --
+    * name VARCHAR(100)
+    * endpoint VARCHAR(100)
+    * status enum('not completed', 'not published', 'active', 'expired')
+    * expired_at DATE nullabel
+    * created_at DATE
+    * updated_at DATE 
+}
+
+entity themeVariabel {
+    * id INT <<PK>
+    * theme_name VARCHAR(100)
+    --
+    * variabel_name VARCHAR(100)
+    * created_at DATE
+    * updated_at DATE 
+}
+
+entity invitationVariabel {
+    * id INT <<PK>>
+    * invitation_id foregnId
+    --
+    * variabel_name VARCHAR(100)
+    * variabel_value VARCHAR(100)
+    * created_at DATE
+    * updated_at DATE 
+}
+
+users }o--|| invitation  
+
+@enduml
