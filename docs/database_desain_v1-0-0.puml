@@ -9,23 +9,36 @@ entity users {
     * updated_at DATE 
 }
 
-entity invitation {
+entity theme {
     * id INT <<PK>>
-    * user_id foregnId
+    * code VARCHAR(20) UNIQUE
     --
     * name VARCHAR(100)
-    * endpoint VARCHAR(100)
-    * status enum('not completed', 'not published', 'active', 'expired')
-    * expired_at DATE nullabel
+    * published BOOL
+    * filename VARCHAR(100) UNIQUE
     * created_at DATE
     * updated_at DATE 
 }
 
 entity themeVariabel {
     * id INT <<PK>
-    * theme_name VARCHAR(100)
+    * theme_id foregnId
     --
     * variabel_name VARCHAR(100)
+    * variabel_type enum('text', 'date')
+    * created_at DATE
+    * updated_at DATE 
+}
+
+entity invitation {
+    * id INT <<PK>>
+    * user_id foregnId
+    * theme_id foregnId
+    --
+    * name VARCHAR(100)
+    * endpoint VARCHAR(100)
+    * status enum('not completed', 'not published', 'active', 'expired')
+    * expired_at DATE nullabel
     * created_at DATE
     * updated_at DATE 
 }
@@ -40,6 +53,22 @@ entity invitationVariabel {
     * updated_at DATE 
 }
 
+entity invitationConfirmAttedance {
+    * id INT <<PK>>
+    * invitation_id foregnId
+    --
+    * name VARCHAR(100)
+    * status enum('presen', 'not sure', 'not presen')
+    * content VARCHAR(255)
+    * created_at DATE
+    * updated_at DATE 
+}
+
 users }o--|| invitation  
+theme }o--|| themeVariabel  
+theme }o--|| invitation
+invitation }o--|| invitationVariabel
+invitation }o--|| invitationConfirmAttedance
+
 
 @enduml
