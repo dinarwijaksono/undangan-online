@@ -60,7 +60,7 @@
         </div>
 
         <div class="overflow-x-auto flex justify-center mt-8">
-            <a href="/invitation/create-invitation" class="btn btn-secondary btn-sm w-5/12">Buat undangan baru</a>
+            <a href="/invitation/select-a-theme" class="btn btn-secondary btn-sm w-5/12">Buat undangan baru</a>
         </div>
 
     </main>

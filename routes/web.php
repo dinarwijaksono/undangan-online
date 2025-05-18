@@ -18,6 +18,7 @@ Route::get('/main', [ManagementController::class, 'index']);
 
 // InvitationController
 Route::get('/invitation/my-invitation', [InvitationController::class, 'myInvitation']);
+Route::get('/invitation/select-a-theme', [InvitationController::class, 'selectATheme']);
 Route::get('/invitation/create-invitation', [InvitationController::class, 'createInvitation']);
 
 // InvitationTemplateController
