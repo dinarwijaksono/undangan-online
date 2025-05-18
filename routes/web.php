@@ -20,6 +20,7 @@ Route::get('/main', [ManagementController::class, 'index']);
 Route::get('/invitation/my-invitation', [InvitationController::class, 'myInvitation']);
 Route::get('/invitation/select-a-theme', [InvitationController::class, 'selectATheme']);
 Route::get('/invitation/create-invitation', [InvitationController::class, 'createInvitation']);
+Route::get('/invitation/edit-invitation', [InvitationController::class, 'editInvitation']);
 
 // InvitationTemplateController
 Route::get('/invitation-template', [InvitationTemplateController::class, 'listTemplate']);

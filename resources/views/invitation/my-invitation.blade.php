@@ -49,7 +49,8 @@
                                     </div>
 
                                     <div class="basis-6/12">
-                                        <button class="btn btn-sm w-full text-white btn-secondary">Edit</button>
+                                        <a href="/invitation/edit-invitation"
+                                            class="btn btn-sm w-full text-white btn-secondary">Edit</a>
                                     </div>
                                 </div>
                             </td>

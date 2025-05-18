@@ -20,4 +20,9 @@ class InvitationController extends Controller
     {
         return view('/invitation/create-invitation');
     }
+
+    public function editInvitation()
+    {
+        return view('/invitation/edit-invitation');
+    }
 }
