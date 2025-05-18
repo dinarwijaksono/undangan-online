@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConfirmAttendanceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\InvitationTemplateController;
@@ -25,3 +26,6 @@ Route::get('/invitation/edit-invitation', [InvitationController::class, 'editInv
 // InvitationTemplateController
 Route::get('/invitation-template', [InvitationTemplateController::class, 'listTemplate']);
 Route::get('/invitation-template/set-variabel', [InvitationTemplateController::class, 'setVariabel']);
+
+// ConfirmAttendanceController
+Route::get('/confirm-attendance', [ConfirmAttendanceController::class, 'index']);
