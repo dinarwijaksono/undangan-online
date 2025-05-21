@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 // AuthController
-Route::get('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
 
 // ManagementController
-Route::get('/main', [ManagementController::class, 'index']);
+Route::get('/main', [ManagementController::class, 'index'])->middleware('auth');
 
 // InvitationController
 Route::get('/invitation/my-invitation', [InvitationController::class, 'myInvitation']);
