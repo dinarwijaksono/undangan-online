@@ -4,6 +4,7 @@ namespace Tests\Feature\Repository;
 
 use App\Models\User;
 use App\RepositoryInterface\UserRepositoryInterface;
+use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
@@ -51,5 +52,31 @@ class UserRepositoryTest extends TestCase
         $this->expectException(\Illuminate\Database\QueryException::class);
 
         $this->userRepository->createUser($name, $email, $password);
+    }
+
+    public function testFindByEmailSuccess()
+    {
+        // Create a user
+        $this->seed(UserSeeder::class);
+
+        $getUser = User::first();
+
+        // Find the user by email
+        $user = $this->userRepository->findByEmail($getUser->email);
+
+        $this->assertNotNull($user);
+        $this->assertEquals($getUser->email, $user->email);
+        $this->assertEquals($getUser->name, $user->name);
+        $this->assertInstanceOf(User::class, $user);
+    }
+
+    public function testFindByEmailUserNotFound()
+    {
+        $email = 'nonexistent@example.com';
+
+        // Attempt to find a user by an email that does not exist
+        $user = $this->userRepository->findByEmail($email);
+
+        $this->assertNull($user);
     }
 }
