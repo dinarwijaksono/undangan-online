@@ -46,4 +46,30 @@ class ThemeServiceTest extends TestCase
         $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $themes);
         $this->assertGreaterThanOrEqual(2, $themes->count());
     }
+
+    public function test_find_by_code_returns_theme_when_exists()
+    {
+        // Arrange: create a theme
+        $name = 'Classic Theme';
+        $filename = 'classic.html';
+        $theme = $this->themeService->createTheme($name, $filename);
+
+        // Act: find by code
+        $foundTheme = $this->themeService->findByCode($theme->code);
+
+        // Assert
+        $this->assertNotNull($foundTheme);
+        $this->assertEquals($theme->code, $foundTheme->code);
+        $this->assertEquals($name, $foundTheme->name);
+        $this->assertEquals($filename, $foundTheme->filename);
+    }
+
+    public function test_find_by_code_returns_null_when_not_found()
+    {
+        // Act
+        $foundTheme = $this->themeService->findByCode('nonexistentcode12345');
+
+        // Assert
+        $this->assertNull($foundTheme);
+    }
 }

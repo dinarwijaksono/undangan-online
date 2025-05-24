@@ -65,4 +65,33 @@ class ThemeService
             throw new \Exception('Failed to retrieve themes: ' . $e->getMessage());
         }
     }
+
+    public function findByCode(string $code): ?Theme
+    {
+        try {
+            $theme = $this->themeRepository->findByCode($code);
+
+            if (!$theme) {
+                Log::warning('Theme not found', [
+                    'code' => $code,
+                ]);
+                return null;
+            }
+
+            Log::info('Theme found', [
+                'code' => $code,
+                'name' => $theme->name,
+            ]);
+
+            return $theme;
+        } catch (\Exception $e) {
+
+            Log::error('Failed to find theme by code', [
+                'code' => $code,
+                'error' => $e->getMessage(),
+            ]);
+
+            throw new \Exception('Failed to find theme: ' . $e->getMessage());
+        }
+    }
 }
