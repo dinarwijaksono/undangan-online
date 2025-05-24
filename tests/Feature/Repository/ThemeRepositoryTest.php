@@ -62,4 +62,30 @@ class ThemeRepositoryTest extends TestCase
         $this->assertTrue($themes->isEmpty());
         $this->assertCount(0, $themes);
     }
+
+    public function test_find_by_code_returns_theme_when_exists()
+    {
+        $code = 'theme002';
+        $name = 'Modern Theme';
+        $filename = 'modern.html';
+
+        $createdTheme = $this->themeRepository->create($code, $name, $filename);
+
+        $foundTheme = $this->themeRepository->findByCode($code);
+
+        $this->assertNotNull($foundTheme);
+        $this->assertEquals($createdTheme->id, $foundTheme->id);
+        $this->assertEquals($code, $foundTheme->code);
+        $this->assertEquals($name, $foundTheme->name);
+        $this->assertEquals($filename, $foundTheme->filename);
+    }
+
+    public function test_find_by_code_returns_null_when_not_exists()
+    {
+        $notExistingCode = 'nonexistent_code';
+
+        $theme = $this->themeRepository->findByCode($notExistingCode);
+
+        $this->assertNull($theme);
+    }
 }

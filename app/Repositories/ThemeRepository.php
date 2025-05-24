@@ -20,4 +20,9 @@ class ThemeRepository implements ThemeRepositoryInterface
     {
         return Theme::get();
     }
+
+    public function findByCode(string $code): ?Theme
+    {
+        return Theme::where('code', $code)->first();
+    }
 }
