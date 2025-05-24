@@ -24,19 +24,19 @@
                     <tr>
                         <td class="w-3/12">Nama</td>
                         <td class="w-1/12 text-center">:</td>
-                        <td class="w-8/12">Dinar Wijaksono</td>
+                        <td class="w-8/12">{{ auth()->user()->name }}</td>
                     </tr>
 
                     <tr>
                         <td>Email</td>
                         <td class="text-center">:</td>
-                        <td>dinarwijaksono11@gmail.com</td>
+                        <td>{{ auth()->user()->email }}</td>
                     </tr>
 
                     <tr>
                         <td>Bergabung</td>
                         <td class="text-center">:</td>
-                        <td>10 November 2025</td>
+                        <td>{{ date('j M Y', strtotime(auth()->user()->created_at)) }}</td>
                 </tbody>
             </table>
         </section>
