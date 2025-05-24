@@ -18,14 +18,14 @@ Route::get('/register', [AuthController::class, 'register'])->middleware('guest'
 Route::get('/main', [ManagementController::class, 'index'])->middleware('auth');
 
 // InvitationController
-Route::get('/invitation/my-invitation', [InvitationController::class, 'myInvitation']);
-Route::get('/invitation/select-a-theme', [InvitationController::class, 'selectATheme']);
-Route::get('/invitation/create-invitation', [InvitationController::class, 'createInvitation']);
-Route::get('/invitation/edit-invitation', [InvitationController::class, 'editInvitation']);
+Route::get('/invitation/my-invitation', [InvitationController::class, 'myInvitation'])->middleware('auth');
+Route::get('/invitation/select-a-theme', [InvitationController::class, 'selectATheme'])->middleware('auth');
+Route::get('/invitation/create-invitation', [InvitationController::class, 'createInvitation'])->middleware('auth');
+Route::get('/invitation/edit-invitation', [InvitationController::class, 'editInvitation'])->middleware('auth');
 
 // InvitationTemplateController
-Route::get('/invitation-template', [InvitationTemplateController::class, 'listTemplate']);
-Route::get('/invitation-template/set-variabel', [InvitationTemplateController::class, 'setVariabel']);
+Route::get('/invitation-template', [InvitationTemplateController::class, 'listTemplate'])->middleware('auth');
+Route::get('/invitation-template/set-variabel', [InvitationTemplateController::class, 'setVariabel'])->middleware('auth');
 
 // ConfirmAttendanceController
-Route::get('/confirm-attendance', [ConfirmAttendanceController::class, 'index']);
+Route::get('/confirm-attendance', [ConfirmAttendanceController::class, 'index'])->middleware('auth');

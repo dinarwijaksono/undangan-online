@@ -39,7 +39,9 @@ class CreateThemeModalFormTest extends TestCase
             ->call('save')
             ->assertHasNoErrors(['name', 'filename'])
             ->assertDispatchedTo('invitation-template.list-template', 'refresh')
-            ->assertDispatched('close-modal');
+            ->assertDispatched('close-modal')
+            ->assertDispatchedTo('components.alert-success', 'open-alert');
+
 
         $this->assertDatabaseHas('themes', [
             'name' => 'satu dua tiga',

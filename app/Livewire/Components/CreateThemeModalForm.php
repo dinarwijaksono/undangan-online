@@ -72,6 +72,7 @@ class CreateThemeModalForm extends Component
 
         $this->dispatch('close-modal')->self();
         $this->dispatch('refresh')->to('invitation-template.list-template');
+        $this->dispatch('open-alert', 'Tema berhasil di buat.')->to('components.alert-success');
     }
 
     public function render()

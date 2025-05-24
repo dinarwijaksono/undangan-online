@@ -1,6 +1,4 @@
 <div>
-    <h1 class="text-3xl mb-5">List template</h1>
-
     <div class="flex justify-center mb-4">
         <button type="button" wire:click="openModalCreateTheme" class="btn btn-primary btn-sm w-5/12">Buat
             Template</button>
