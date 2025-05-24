@@ -35,7 +35,34 @@ class ThemeService
 
             return $theme;
         } catch (\Exception $e) {
+
+            Log::error('create theme failed', [
+                'code' => $code,
+                'name' => $name,
+                'filename' => $filename,
+            ]);
+
             throw new \Exception('Failed to create theme: ' . $e->getMessage());
+        }
+    }
+
+    public function getAll(): ?\Illuminate\Database\Eloquent\Collection
+    {
+        try {
+            $themes = $this->themeRepository->getAll();
+
+            Log::info('Retrieved all themes', [
+                'count' => $themes->count(),
+            ]);
+
+            return $themes;
+        } catch (\Exception $e) {
+
+            Log::error('Failed to retrieve themes', [
+                'error' => $e->getMessage(),
+            ]);
+
+            throw new \Exception('Failed to retrieve themes: ' . $e->getMessage());
         }
     }
 }
