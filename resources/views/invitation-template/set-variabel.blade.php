@@ -4,32 +4,7 @@
     <main class="basis-10/12 px-4 bg-base-200 py-6">
         <h1 class="text-3xl mb-5">Atur variabel </h1>
 
-        <section class="mb-5 overflow-x-auto p-4 rounded-lg bg-base-100">
-            <h1 class="mb-5 text-2xl">Template</h1>
-
-            <table class="table table-zebra mb-4">
-                <tbody>
-                    <tr>
-                        <td class="w-3/12">Nama Template</td>
-                        <td class="w-1/12">:</td>
-                        <td class="w-8/12">contoh nama</td>
-                    </tr>
-
-                    <tr>
-                        <td>Dibuat</td>
-                        <td>:</td>
-                        <td>10 November 2025</td>
-                    </tr>
-
-                </tbody>
-            </table>
-
-            <div class="flex justify-end">
-                <div class="basis-2/12">
-                    <button class="btn btn-secondary w-full btn-sm">Preview</button>
-                </div>
-            </div>
-        </section>
+        @livewire('invitation-template.section-template', ['code' => $code])
 
         <section class="mb-5 overflow-x-auto p-4 rounded-lg bg-base-100">
             <h1 class="mb-5 text-2xl">Variabel</h1>

@@ -14,7 +14,8 @@
                 </div>
 
                 <div class="basis-2/12">
-                    <a href="/invitation-template/set-variabel" class="btn btn-info w-full btn-sm">Atur Variabel</a>
+                    <a href="/invitation-template/set-variabel/{{ $key->code }}"
+                        class="btn btn-info w-full btn-sm">Atur Variabel</a>
                 </div>
             </div>
         </section>

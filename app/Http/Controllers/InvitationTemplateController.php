@@ -11,8 +11,10 @@ class InvitationTemplateController extends Controller
         return view('invitation-template.list-template');
     }
 
-    public function setVariabel()
+    public function setVariabel(string $code)
     {
-        return view('invitation-template.set-variabel');
+        $data['code'] = $code;
+
+        return view('invitation-template.set-variabel', $data);
     }
 }
