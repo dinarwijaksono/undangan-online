@@ -5,5 +5,7 @@
 
         @livewire('invitation-template.list-template')
 
+        @livewire('components.create-theme-modal-form')
+
     </main>
 @endsection

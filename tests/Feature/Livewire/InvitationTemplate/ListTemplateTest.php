@@ -15,4 +15,11 @@ class ListTemplateTest extends TestCase
         Livewire::test(ListTemplate::class)
             ->assertStatus(200);
     }
+
+    public function test_click_open_modal_create_theme()
+    {
+        Livewire::test(ListTemplate::class)
+            ->call('openModalCreateTheme')
+            ->assertDispatchedTo('components.create-theme-modal-form', 'open-modal');
+    }
 }

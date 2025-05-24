@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('code', 20)->unique();
             $table->string('name', 100);
             $table->boolean('is_publised')->default(false);
-            $table->string('filename')->unique();
+            $table->string('filename');
             $table->timestamps();
         });
     }

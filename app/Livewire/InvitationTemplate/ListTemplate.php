@@ -6,24 +6,27 @@ use Livewire\Component;
 
 class ListTemplate extends Component
 {
-    public $template;
+    public $templates;
+
+    protected $themeService;
 
     public function boot()
     {
-        self::getTemplates();
+        $this->themeService = app()->make(\App\Services\ThemeService::class);
+
+        $this->templates = $this->themeService->getAll()->sortByDesc('created_at');
     }
 
-    public function getTemplates()
+    public function getListeners()
     {
-        $t = glob("templates/*");
+        return [
+            'refresh' => 'render'
+        ];
+    }
 
-        $tem = [];
-
-        for ($i = 0; $i < count($t); $i++) {
-            $tem[] = trim(str_replace(["templates/", ".html"], ["", ""], $t[$i]));
-        }
-
-        $this->template = $tem;
+    public function openModalCreateTheme()
+    {
+        $this->dispatch('open-modal')->to('components.create-theme-modal-form');
     }
 
     public function render()
