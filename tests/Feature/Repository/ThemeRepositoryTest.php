@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Repository;
 
+use App\Models\Theme;
+use Database\Seeders\CreateThemeSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -36,5 +38,28 @@ class ThemeRepositoryTest extends TestCase
             'name' => $name,
             'filename' => $filename,
         ]);
+    }
+
+    public function test_get_all_themes_returns_collection()
+    {
+        // Arrange: create some themes
+        $this->seed(CreateThemeSeeder::class);
+        $this->seed(CreateThemeSeeder::class);
+        $this->seed(CreateThemeSeeder::class);
+
+
+        $themes = $this->themeRepository->getAll();
+
+        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $themes);
+        $this->assertNotNull($themes);
+        $this->assertCount(3, $themes);
+    }
+
+    public function test_get_all_themes_returns_empty_when_none_exist()
+    {
+        $themes = $this->themeRepository->getAll();
+
+        $this->assertTrue($themes->isEmpty());
+        $this->assertCount(0, $themes);
     }
 }

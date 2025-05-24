@@ -15,4 +15,9 @@ class ThemeRepository implements ThemeRepositoryInterface
             'filename' => $filename
         ]);
     }
+
+    public function getAll(): ?\Illuminate\Database\Eloquent\Collection
+    {
+        return Theme::get();
+    }
 }
