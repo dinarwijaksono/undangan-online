@@ -17,4 +17,5 @@ Route::delete('/logout', [AuthControllerApi::class, 'logout'])->middleware('auth
 // TemplateControllerApi
 Route::post('/template', [TemplateControllerApi::class, 'create'])->middleware('auth:sanctum');
 Route::get("/template", [TemplateControllerApi::class, 'getAll'])->middleware('auth:sanctum');
+Route::delete("/template", [TemplateControllerApi::class, 'delete'])->middleware('auth:sanctum');
 Route::get("/template/{code}", [TemplateControllerApi::class, 'findByCode'])->middleware('auth:sanctum');

@@ -98,4 +98,34 @@ class TemplateControllerApi extends Controller
 
         return response()->json($template, 200);
     }
+
+    public function delete(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            Log::warning('delete template failed, validate error', [
+                'user_id' => auth()->user()->id,
+                'template_code' => $request->code
+            ]);
+
+            return response()->json([
+                'message' => ['Template gagal dihapus.']
+            ], 400);
+        }
+
+        Template::where('code', $request->code)
+            ->delete();
+
+        Log::info('delete template success', [
+            'user_id' => auth()->user()->id,
+            'template_code' => $request->code
+        ]);
+
+        return response()->json([
+            'message' => ['Template berhasil dihapus.']
+        ], 204);
+    }
 }

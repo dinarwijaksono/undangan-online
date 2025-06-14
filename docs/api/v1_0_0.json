@@ -287,6 +287,37 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "summary": "Hapus template",
+                "tags": [
+                    "Template"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Template berhasil dihapus"
+                    }
+                }
             }
         },
         "/templates/{code}": {
@@ -336,32 +367,6 @@
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Hapus template",
-                "tags": [
-                    "Template"
-                ],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Template berhasil dihapus"
                     }
                 }
             },

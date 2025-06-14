@@ -93,4 +93,28 @@ class TemplateControllerApiTest extends TestCase
         ]);
         $response->assertJsonCount(3);
     }
+
+    public function test_delete_failed_validate_error()
+    {
+        $response = $this->delete("/api/template");
+
+        $response->assertStatus(400);
+        $response->assertJsonStructure(['message']);
+        $response->assertJsonPath('message.0', 'Template gagal dihapus.');
+    }
+
+    public function test_delete_success()
+    {
+        $this->seed(CreateTemplateSeeder::class);
+        $template = Template::first();
+
+        $response = $this->delete("/api/template", [
+            'code' => $template->code
+        ]);
+
+        $response->assertStatus(204);
+        $this->assertDatabaseMissing('templates', [
+            'code' => $template->code
+        ]);
+    }
 }
