@@ -8,4 +8,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/register', [AuthControllerApi::class, 'register']);
+// AuthControllerApi
+Route::post('/register', [AuthControllerApi::class, 'register'])->middleware('guest:sanctum');
+Route::post('/login', [AuthControllerApi::class, 'login'])->middleware('guest:sanctum');

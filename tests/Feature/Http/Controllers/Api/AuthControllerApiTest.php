@@ -52,4 +52,51 @@ class AuthControllerApiTest extends TestCase
             'email' => 'johndoe@example.com'
         ]);
     }
+
+    public function test_login_validate_error()
+    {
+        $response = $this->post('/api/login');
+
+        $response->assertStatus(400);
+        $response->assertJsonStructure(['errors' => ['email', 'password']]);
+    }
+
+    public function test_login_email_is_not_empty()
+    {
+        $response = $this->post('/api/login', [
+            'email' => 'emailisempty@example.com',
+            'password' => 'test1234'
+        ]);
+
+        $response->assertStatus(400);
+        $response->assertJsonStructure(['general']);
+        $response->assertJsonPath('general.0', 'Email atau password salah.');
+    }
+
+    public function test_login_password_is_wrong()
+    {
+        $this->seed(UserSeeder::class);
+
+        $response = $this->post('/api/login', [
+            'email' => 'johndoe@example.com',
+            'password' => 'passwordiswrong'
+        ]);
+
+        $response->assertStatus(400);
+        $response->assertJsonStructure(['general']);
+        $response->assertJsonPath('general.0', 'Email atau password salah.');
+    }
+
+    public function test_login_success()
+    {
+        $this->seed(UserSeeder::class);
+
+        $response = $this->post('/api/login', [
+            'email' => 'johndoe@example.com',
+            'password' => 'password123'
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['token']);
+    }
 }

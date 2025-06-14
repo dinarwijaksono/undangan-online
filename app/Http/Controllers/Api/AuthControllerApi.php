@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -50,5 +52,30 @@ class AuthControllerApi extends Controller
             'name' => $register->name,
             'email' => $register->email
         ], 201);
+    }
+
+
+    public function login(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), (new LoginRequest())->rules());
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 400);
+        }
+
+        $user = $this->userService->login($request->email, $request->password);
+
+        if (is_null($user)) {
+            return response()->json([
+                'general' => ['Email atau password salah.']
+            ], 400);
+        }
+
+        $token = $user->createToken('api-token');
+        return response()->json([
+            'token' => $token->plainTextToken
+        ], 200);
     }
 }
