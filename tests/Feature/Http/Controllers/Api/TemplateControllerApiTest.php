@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Http\Controllers\Api;
 
+use App\Models\Template;
 use App\Models\User;
+use Database\Seeders\CreateTemplateSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -31,7 +33,7 @@ class TemplateControllerApiTest extends TestCase
         $response->assertJsonStructure(['errors' => ['name']]);
     }
 
-    public function test_creat_templatee_success()
+    public function test_create_templatee_success()
     {
         $response = $this->post('/api/template', [
             'name' => 'example name'
@@ -43,6 +45,37 @@ class TemplateControllerApiTest extends TestCase
         $this->assertDatabaseHas('templates', [
             'name' => 'example name',
             'is_publish' => false
+        ]);
+    }
+
+    public function test_find_by_code_but_code_template_not_found()
+    {
+        $response = $this->get("/api/template/alskflkj");
+
+        $response->assertStatus(400);
+        $response->assertJsonPath('message.0', 'Template tidak ditemukan.');
+    }
+
+    public function test_find_by_code_success()
+    {
+        $this->seed(CreateTemplateSeeder::class);
+        $template = Template::first();
+
+        $code = $template->code;
+
+        $response = $this->get("/api/template/$code");
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'code',
+            'name',
+            'thumbnail_path',
+            'html_path',
+            'css_path',
+            'js_path',
+            'is_publish',
+            'created_at',
+            'updated_at'
         ]);
     }
 }

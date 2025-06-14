@@ -41,4 +41,42 @@ class TemplateControllerApi extends Controller
             'code' => $code
         ], 201);
     }
+
+    public function findByCode($code)
+    {
+        $template = Template::where('code', $code)->get();
+
+        if ($template->isEmpty()) {
+
+            Log::warning('validasi error', [
+                'user_id' => auth()->user()->id,
+                'template_code' => $code
+            ]);
+
+            return response()->json([
+                'message' => [
+                    'Template tidak ditemukan.'
+                ]
+            ], 400);
+        }
+
+        $template = $template->first();
+
+        Log::info('find template by code success', [
+            'user_id' => auth()->user()->id,
+            'template_code' => $code
+        ]);
+
+        return response()->json([
+            'code' => $template->code,
+            'name' => $template->name,
+            'thumbnail_path' => $template->thumbnail_path,
+            'html_path' => $template->html_path,
+            'css_path' => $template->css_path,
+            'js_path' => $template->js_path,
+            'is_publish' => $template->is_publish,
+            'created_at' => $template->created_at,
+            'updated_at' => $template->updated_at
+        ], 200);
+    }
 }
