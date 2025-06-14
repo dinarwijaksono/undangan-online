@@ -78,4 +78,13 @@ class AuthControllerApi extends Controller
             'token' => $token->plainTextToken
         ], 200);
     }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => "Berhasil logout."
+        ], 200);
+    }
 }

@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\Http\Controllers\Api;
 
+use App\Models\User;
 use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class AuthControllerApiTest extends TestCase
@@ -98,5 +100,19 @@ class AuthControllerApiTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonStructure(['token']);
+    }
+
+    public function test_logout()
+    {
+        $this->seed(UserSeeder::class);
+        $user = User::first();
+
+        Sanctum::actingAs($user);
+
+        $response = $this->delete('/api/logout');
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['message']);
+        $response->assertJsonPath('message', 'Berhasil logout.');
     }
 }

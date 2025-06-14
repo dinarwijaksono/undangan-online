@@ -10,4 +10,5 @@ Route::get('/user', function (Request $request) {
 
 // AuthControllerApi
 Route::post('/register', [AuthControllerApi::class, 'register'])->middleware('guest:sanctum');
-Route::post('/login', [AuthControllerApi::class, 'login'])->middleware('guest:sanctum');
+Route::post('/login', [AuthControllerApi::class, 'login'])->name('login')->middleware('guest:sanctum');
+Route::delete('/logout', [AuthControllerApi::class, 'logout'])->middleware('auth:sanctum');
