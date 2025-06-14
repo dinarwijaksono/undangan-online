@@ -9,6 +9,20 @@ entity users {
     * updated_at DATE 
 }
 
+entity templates {
+    * id INT <<PK>>
+    * code VARCHAR(20) UNIQUE
+    --
+    * name VARCHAR(100)
+    * thumbnail_path ARRAY nullabel
+    * html_path ARRAY nullabel
+    * css_path ARRAY nullabel
+    * js_path ARRAY nullabel
+    * is_publish BOOL default(false)
+    * created_at DATE
+    * updated_at DATE 
+}
+
 entity theme {
     * id INT <<PK>>
     * code VARCHAR(20) UNIQUE

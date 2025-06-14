@@ -175,6 +175,81 @@
             }
         },
         "/templates": {
+            "post": {
+                "summary": "Buat template baru",
+                "tags": [
+                    "Template"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil buat template",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validasi gagal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "get": {
                 "summary": "List semua template",
                 "tags": [
@@ -190,13 +265,19 @@
                                     "items": {
                                         "type": "object",
                                         "properties": {
-                                            "id": {
-                                                "type": "integer"
+                                            "code": {
+                                                "type": "string"
                                             },
                                             "name": {
                                                 "type": "string"
                                             },
                                             "thumbnail_url": {
+                                                "type": "string"
+                                            },
+                                            "is_publish": {
+                                                "type": "boolean"
+                                            },
+                                            "created_at": {
                                                 "type": "string"
                                             }
                                         }
@@ -206,60 +287,58 @@
                         }
                     }
                 }
-            },
-            "post": {
-                "summary": "Upload template baru",
+            }
+        },
+        "/templates/{code}": {
+            "get": {
+                "summary": "Detail template",
                 "tags": [
                     "Template"
                 ],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object",
-                                "required": [
-                                    "name",
-                                    "html_file"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "html_file": {
-                                        "type": "string",
-                                        "format": "binary"
-                                    },
-                                    "css_file": {
-                                        "type": "string",
-                                        "format": "binary"
-                                    },
-                                    "js_file": {
-                                        "type": "string",
-                                        "format": "binary"
-                                    },
-                                    "thumbnail": {
-                                        "type": "string",
-                                        "format": "binary"
+                "responses": {
+                    "200": {
+                        "description": "Lihat detail template",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "aslkjkkjk"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "thumbnail_path": {
+                                            "type": "object"
+                                        },
+                                        "html_path": {
+                                            "type": "string"
+                                        },
+                                        "css_path": {
+                                            "type": "object"
+                                        },
+                                        "js_paht": {
+                                            "type": "object"
+                                        },
+                                        "is_publish": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Template berhasil dibuat"
-                    }
                 }
-            }
-        },
-        "/templates/{id}": {
+            },
             "delete": {
                 "summary": "Hapus template",
                 "tags": [
