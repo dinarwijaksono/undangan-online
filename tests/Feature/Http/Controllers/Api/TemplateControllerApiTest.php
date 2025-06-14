@@ -78,4 +78,19 @@ class TemplateControllerApiTest extends TestCase
             'updated_at'
         ]);
     }
+
+    public function test_get_all_success()
+    {
+        $this->seed(CreateTemplateSeeder::class);
+        $this->seed(CreateTemplateSeeder::class);
+        $this->seed(CreateTemplateSeeder::class);
+
+        $response = $this->get("/api/template");
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            ['code', 'name', 'thumbnail_path', 'is_publish', 'created_at', 'updated_at']
+        ]);
+        $response->assertJsonCount(3);
+    }
 }

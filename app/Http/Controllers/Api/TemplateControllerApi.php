@@ -79,4 +79,23 @@ class TemplateControllerApi extends Controller
             'updated_at' => $template->updated_at
         ], 200);
     }
+
+    public function getAll(): JsonResponse
+    {
+        $template = Template::select(
+            'code',
+            'name',
+            'thumbnail_path',
+            'is_publish',
+            'created_at',
+            'updated_at'
+        )->orderByDesc('created_at')
+            ->get();
+
+        Log::info('get all template success', [
+            'user_id' => auth()->user()->id
+        ]);
+
+        return response()->json($template, 200);
+    }
 }
