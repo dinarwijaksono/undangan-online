@@ -83,6 +83,7 @@ class TemplateControllerApi extends Controller
     public function getAll(): JsonResponse
     {
         $template = Template::select(
+            'id',
             'code',
             'name',
             'thumbnail_path',
