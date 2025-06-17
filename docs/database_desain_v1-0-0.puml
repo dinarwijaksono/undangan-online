@@ -23,23 +23,13 @@ entity templates {
     * updated_at DATE 
 }
 
-entity theme {
+entity template_variabel {
     * id INT <<PK>>
-    * code VARCHAR(20) UNIQUE
+    * foregnId templates
     --
     * name VARCHAR(100)
-    * published BOOL
-    * filename VARCHAR(100) UNIQUE
-    * created_at DATE
-    * updated_at DATE 
-}
-
-entity themeVariabel {
-    * id INT <<PK>
-    * theme_id foregnId
-    --
-    * variabel_name VARCHAR(100)
-    * variabel_type enum('text', 'date')
+    * type ENUM(text, date),
+    * default_value VARCHAR(100)
     * created_at DATE
     * updated_at DATE 
 }
@@ -47,27 +37,29 @@ entity themeVariabel {
 entity invitation {
     * id INT <<PK>>
     * user_id foregnId
-    * theme_id foregnId
+    * template_id foregnId
     --
-    * name VARCHAR(100)
-    * endpoint VARCHAR(100)
-    * status enum('not completed', 'not published', 'active', 'expired')
+    * slug VARCHAR(100)
+    * is_demo BOOL
+    * is_publish BOOL
+    * event_at DATE
     * expired_at DATE nullabel
     * created_at DATE
     * updated_at DATE 
 }
 
-entity invitationVariabel {
+entity invitation_variabel {
     * id INT <<PK>>
     * invitation_id foregnId
     --
-    * variabel_name VARCHAR(100)
-    * variabel_value VARCHAR(100)
+    * name VARCHAR(100)
+    * type ENUM(text, date),
+    * value VARCHAR(100)
     * created_at DATE
-    * updated_at DATE 
+    * updated_at DATE
 }
 
-entity invitationConfirmAttedance {
+entity rsvp {
     * id INT <<PK>>
     * invitation_id foregnId
     --
@@ -78,11 +70,10 @@ entity invitationConfirmAttedance {
     * updated_at DATE 
 }
 
-users }o--|| invitation  
-theme }o--|| themeVariabel  
-theme }o--|| invitation
-invitation }o--|| invitationVariabel
-invitation }o--|| invitationConfirmAttedance
-
+templates ||--o{ template_variabel  
+users ||--o{  invitation
+templates ||--o{ invitation 
+invitation ||--o{  invitation_variabel
+invitation ||--o{  rsvp
 
 @enduml

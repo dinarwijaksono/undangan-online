@@ -13,7 +13,7 @@
     "paths": {
         "/auth/register": {
             "post": {
-                "summary": "Register pengguna baru",
+                "summary": "Buat user baru",
                 "tags": [
                     "Auth"
                 ],
@@ -174,15 +174,56 @@
                 }
             }
         },
+        "/auth/logout": {
+            "delete": {
+                "summary": "Logout user",
+                "tags": [
+                    "Auth"
+                ],
+                "parameters": [
+                    {
+                        "name": "api-token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logout berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil logout."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/templates": {
             "post": {
                 "summary": "Buat template baru",
                 "tags": [
                     "Template"
                 ],
-                "security": [
+                "parameters": [
                     {
-                        "bearerAuth": []
+                        "name": "api-token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -190,13 +231,10 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        }
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -209,16 +247,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "code": {
-                                                "type": "string"
-                                            },
-                                            "name": {
-                                                "type": "string"
-                                            }
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
                                         }
                                     }
                                 }
@@ -238,7 +273,11 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "name": {
-                                                        "type": "string"
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "Nama harus diisi."
+                                                        }
                                                     }
                                                 }
                                             }
@@ -251,9 +290,19 @@
                 }
             },
             "get": {
-                "summary": "List semua template",
+                "summary": "Tampil semua template",
                 "tags": [
                     "Template"
+                ],
+                "parameters": [
+                    {
+                        "name": "api-token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -293,26 +342,16 @@
                 "tags": [
                     "Template"
                 ],
-                "security": [
+                "parameters": [
                     {
-                        "bearerAuth": []
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "code": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
+                        "name": "api-token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
                         }
                     }
-                },
+                ],
                 "responses": {
                     "204": {
                         "description": "Template berhasil dihapus"
@@ -325,6 +364,25 @@
                 "summary": "Detail template",
                 "tags": [
                     "Template"
+                ],
+                "parameters": [
+                    {
+                        "name": "api-token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "abcdefg"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -369,24 +427,29 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/template/{code}/upload-asset": {
             "put": {
-                "summary": "Update template",
+                "summary": "Update asset, html / css / js / thumbnail / img",
                 "tags": [
                     "Template"
                 ],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "path",
+                        "name": "api-token",
+                        "in": "header",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -397,12 +460,22 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "name": {
+                                    "file": {
                                         "type": "string"
-                                    },
-                                    "thumbnail": {
+                                    }
+                                }
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "type_file"
+                                ],
+                                "properties": {
+                                    "type_file": {
                                         "type": "string",
-                                        "format": "binary"
+                                        "example": "html / css / js / thumbnail / jpg"
                                     }
                                 }
                             }
@@ -411,20 +484,90 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Template diperbarui"
+                        "description": "Template diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Asset berhasil diupload."
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
         },
-        "/template/variabel": {
+        "/template/{code}/delete-asset": {
+            "delete": {
+                "summary": "Hapus asset",
+                "tags": [
+                    "Template"
+                ],
+                "parameters": [
+                    {
+                        "name": "api-token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file_path": {
+                                        "type": "string",
+                                        "example": "css/asdfsfsafsadf.css"
+                                    },
+                                    "file_type": {
+                                        "type": "string",
+                                        "example": "html/index.html | css/asdfasdfa.css | js/asfsadf.js | thumbnail/asdf.jpg | picture/asfdd.jpg"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil hapus asset"
+                    }
+                }
+            }
+        },
+        "/template/variabel/{code}": {
             "post": {
                 "summary": "Tambah variabel template",
                 "tags": [
                     "Template variabel"
                 ],
-                "security": [
+                "parameters": [
                     {
-                        "bearerAuth": []
+                        "name": "api-token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "asdflksadf"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -465,14 +608,11 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "message": {
-                                                "type": "string",
-                                                "default": "Variebal berhasil disimpan"
-                                            }
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Variebal berhasil disimpan"
                                         }
                                     }
                                 }
@@ -486,6 +626,10 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Variabel gagal disimpan."
+                                        },
                                         "errors": {
                                             "type": "array",
                                             "items": {
@@ -509,27 +653,26 @@
                 "tags": [
                     "Template variabel"
                 ],
-                "security": [
+                "parameters": [
                     {
-                        "bearerAuth": []
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "template_id": {
-                                        "type": "integer",
-                                        "default": 1
-                                    }
-                                }
-                            }
+                        "name": "api-token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "asldkfj"
+                        }
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "sadflaks"
                         }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Berhasil menampilkan semua template berdasarkan template_id",
@@ -593,9 +736,14 @@
                 "tags": [
                     "Template variabel"
                 ],
-                "security": [
+                "parameters": [
                     {
-                        "bearerAuth": []
+                        "name": "api-token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -616,33 +764,26 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Berhasil hapus variabel berdasarkan id",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "default": "Variebal berhasil disimpan"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Berhasil hapus variabel berdasarkan id"
                     }
                 }
             }
         },
-        "/invitations": {
+        "/invitation": {
             "post": {
                 "summary": "Buat undangan dari template",
                 "tags": [
                     "Invitation"
                 ],
-                "security": [
+                "parameters": [
                     {
-                        "bearerAuth": []
+                        "name": "api-token",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "asdflksadf"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -661,12 +802,6 @@
                                     },
                                     "slug": {
                                         "type": "string"
-                                    },
-                                    "variables": {
-                                        "type": "object",
-                                        "additionalProperties": {
-                                            "type": "string"
-                                        }
                                     }
                                 }
                             }

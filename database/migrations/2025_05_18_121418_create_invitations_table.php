@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('theme_id');
-            $table->string('name', 100);
-            $table->string('endpoint', 100);
-            $table->enum('status', ['not completed', 'not published', 'active', 'expired'])->default('not completed');
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('template_id');
+            $table->string('slug', 200);
+            $table->bool('is_demo')->default(false);
+            $table->bool('is_publish')->default(false);
+            $table->date('event_at');
             $table->date('expired_at')->nullable();
             $table->timestamps();
         });
