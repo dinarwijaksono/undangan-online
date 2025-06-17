@@ -78,4 +78,37 @@ class TemplateVariabelControllerApiTest extends TestCase
             'default_value' => null
         ]);
     }
+
+    public function test_get_all_but_template_not_exist()
+    {
+        $response = $this->get('/api/template/variabel/sfdfsdf', [
+            'template_id' => 101,
+        ]);
+
+        $response->assertStatus(400);
+        $response->assertJsonStructure(['message', 'errors' => ['template']]);
+        $response->assertJsonPath('message', 'Template tidak ditemukan.');
+    }
+
+    public function test_get_all_success()
+    {
+        $this->seed(CreateTemplateSeeder::class);
+        $template = Template::first();
+
+        $this->post('/api/template/variabel', [
+            'template_id' => $template->id,
+            'name' => 'nama calon pria',
+            'type' => 'text',
+            'default_value' => 'aku'
+        ]);
+
+        $response = $this->get("/api/template/variabel/$template->code", [
+            'code' => $template->code,
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            ['id', 'template_id', 'name', 'default_value', 'created_at']
+        ]);
+    }
 }

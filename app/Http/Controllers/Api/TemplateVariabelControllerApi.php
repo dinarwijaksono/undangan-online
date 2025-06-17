@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Template;
 use App\Models\TemplateVariabel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -36,8 +37,43 @@ class TemplateVariabelControllerApi extends Controller
             'default_value' => isset($request->default_value) ? $request->default_value : null
         ]);
 
+        Log::info('create template variabel success', [
+            'user_id' => auth()->user()->id,
+            'template_id' => $request->template_id,
+        ]);
+
         return response()->json([
             'message' => ['Variabel berhasil disimpan.']
         ], 200);
+    }
+
+    public function getAll($code): JsonResponse
+    {
+        $template = Template::where('code', $code)->get();
+        if ($template->isEmpty()) {
+
+            Log::warning('get all template variabel failed, template not exist', [
+                'user_id' => auth()->user()->id,
+                'template_code' => $code
+            ]);
+
+            return response()->json([
+                'message' => 'Template tidak ditemukan.',
+                'errors' => ['template' => 'Template tidak ditemukan.']
+            ], 400);
+        }
+
+        $template = $template->first();
+
+        $templateVariabel = TemplateVariabel::where('template_id', $template->id)
+            ->select('id', 'template_id', 'name', 'default_value', 'created_at')
+            ->get();
+
+        Log::info('get all template variabel success', [
+            'user_id' => auth()->user()->id,
+            'template_id' => $template->id
+        ]);
+
+        return response()->json($templateVariabel, 200);
     }
 }

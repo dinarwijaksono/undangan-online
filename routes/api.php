@@ -23,3 +23,4 @@ Route::get("/template/{code}", [TemplateControllerApi::class, 'findByCode'])->mi
 
 // TemplateVariabelControllerApi
 Route::post('/template/variabel', [TemplateVariabelControllerApi::class, 'create'])->middleware('auth:sanctum');
+Route::get('/template/variabel/{code}', [TemplateVariabelControllerApi::class, 'getAll'])->middleware('auth:sanctum');
