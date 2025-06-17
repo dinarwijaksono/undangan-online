@@ -3,8 +3,10 @@
 namespace Tests\Feature\Http\Controllers\Api;
 
 use App\Models\Template;
+use App\Models\TemplateVariabel;
 use App\Models\User;
 use Database\Seeders\CreateTemplateSeeder;
+use Database\Seeders\CreateTemplateVariabelSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -95,12 +97,7 @@ class TemplateVariabelControllerApiTest extends TestCase
         $this->seed(CreateTemplateSeeder::class);
         $template = Template::first();
 
-        $this->post('/api/template/variabel', [
-            'template_id' => $template->id,
-            'name' => 'nama calon pria',
-            'type' => 'text',
-            'default_value' => 'aku'
-        ]);
+        $this->seed(CreateTemplateVariabelSeeder::class);
 
         $response = $this->get("/api/template/variabel/$template->code", [
             'code' => $template->code,
@@ -109,6 +106,32 @@ class TemplateVariabelControllerApiTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([
             ['id', 'template_id', 'name', 'default_value', 'created_at']
+        ]);
+    }
+
+    public function test_delete_failed_validate_error()
+    {
+        $response = $this->delete('/api/template/variabel');
+
+        $response->assertStatus(400);
+        $response->assertJsonStructure(['errors' => ['id']]);
+    }
+
+    public function test_delete_success()
+    {
+        $this->seed(CreateTemplateSeeder::class);
+        $this->seed(CreateTemplateVariabelSeeder::class);
+
+        $variabel = TemplateVariabel::first();
+
+        $response = $this->delete('/api/template/variabel', [
+            'id' => $variabel->id
+        ]);
+
+        $response->assertStatus(204);
+        $this->assertDatabaseMissing('template_variabels', [
+            'id' => $variabel->id,
+            'name' => $variabel->name
         ]);
     }
 }

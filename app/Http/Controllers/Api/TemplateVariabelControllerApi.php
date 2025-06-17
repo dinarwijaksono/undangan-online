@@ -76,4 +76,31 @@ class TemplateVariabelControllerApi extends Controller
 
         return response()->json($templateVariabel, 200);
     }
+
+    public function delete(Request $request): ?JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            Log::warning('delete template variabel failed, validate error', [
+                'user_id' => auth()->user()->id,
+                'id' => $request->id,
+            ]);
+
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 400);
+        }
+
+        TemplateVariabel::where('id', $request->id)->delete();
+
+        Log::info('delete template variabel success', [
+            'user_id' => auth()->user()->id,
+            'id' => $request->id
+        ]);
+
+        return response()->json([], 204);
+    }
 }
