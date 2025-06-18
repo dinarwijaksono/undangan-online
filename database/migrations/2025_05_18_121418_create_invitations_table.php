@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->foreignId('template_id');
             $table->string('slug', 200);
-            $table->bool('is_demo')->default(false);
-            $table->bool('is_publish')->default(false);
+            $table->boolean('is_demo')->default(false);
+            $table->boolean('is_publish')->default(false);
             $table->date('event_at');
             $table->date('expired_at')->nullable();
             $table->timestamps();
