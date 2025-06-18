@@ -28,7 +28,9 @@ class TemplateControllerApi extends Controller
 
         Template::create([
             'code' => $code,
-            'name' => $request->name
+            'name' => $request->name,
+            'css_path' => json_encode([]),
+            'js_path' => json_encode([])
         ]);
 
         Log::info('template create success', [
@@ -98,6 +100,76 @@ class TemplateControllerApi extends Controller
         ]);
 
         return response()->json($template, 200);
+    }
+
+    public function uploadAsset(Request $request, $code): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|extensions:html,css,js',
+            'file_type' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            Log::warning('upload file failed, validate error', [
+                'user_id' => auth()->user()->id,
+                'file_type' => $request->file_type
+            ]);
+
+            return response()->json([
+                'errors' => $validator->errors(),
+                'message' => [
+                    'Upload file gagal, validasi error.'
+                ]
+            ], 400);
+        }
+
+        $file = $request->file('file');
+        $extension = strtolower($file->getClientOriginalExtension());
+        $name = Str::random(10) . '.' . $extension;
+        $file->storeAs($extension, $name, 'public-custom');
+
+        $template = Template::where('code', $code)->get();
+        if ($template->isEmpty()) {
+            Log::warning('upload file failed, code template is not exist', [
+                'user_id' => auth()->user()->id,
+                'file_type' => $request->file_type
+            ]);
+
+            return response()->json([
+                'message' => [
+                    'Upload file gagal, kode template tidak ditemukan.'
+                ]
+            ], 400);
+        }
+        $template = $template->first();
+
+        if ($extension == 'css') {
+            $array = json_decode($template->css_path);
+            $array[] = $name;
+
+            Template::where('code', $code)->update([
+                'css_path' => json_encode($array)
+            ]);
+        }
+
+        if ($extension == 'js') {
+            $array = json_decode($template->js_path);
+            $array[] = $name;
+
+            Template::where('code', $code)->update([
+                'js_path' => json_encode($array)
+            ]);
+        }
+
+        if ($extension == 'html') {
+            Template::where('code', $code)->update([
+                'html_path' => $name
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Asset berhasil diupload.'
+        ], 200);
     }
 
     public function delete(Request $request): JsonResponse

@@ -20,6 +20,7 @@ Route::post('/template', [TemplateControllerApi::class, 'create'])->middleware('
 Route::get("/template", [TemplateControllerApi::class, 'getAll'])->middleware('auth:sanctum');
 Route::delete("/template", [TemplateControllerApi::class, 'delete'])->middleware('auth:sanctum');
 Route::get("/template/{code}", [TemplateControllerApi::class, 'findByCode'])->middleware('auth:sanctum');
+Route::post("/template/{code}/upload-asset", [TemplateControllerApi::class, 'uploadAsset'])->middleware('auth:sanctum');
 
 // TemplateVariabelControllerApi
 Route::post('/template/variabel', [TemplateVariabelControllerApi::class, 'create'])->middleware('auth:sanctum');
