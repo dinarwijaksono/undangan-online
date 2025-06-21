@@ -15,4 +15,11 @@ class TemplateController extends Controller
     {
         return view('template.detail-template');
     }
+
+    public function setVariabel(string $code)
+    {
+        $data['code'] = $code;
+
+        return view('template.set-variabel', $data);
+    }
 }

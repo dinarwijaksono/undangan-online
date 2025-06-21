@@ -27,6 +27,7 @@ Route::get('/invitation/edit-invitation', [InvitationController::class, 'editInv
 // TemplateController
 Route::get('/template', [TemplateController::class, 'listTemplate'])->middleware('auth');
 Route::get('/template/detail-template/{code}', [TemplateController::class, 'detailTemplate'])->middleware('auth');
+Route::get('/template/set-variabel/{code}', [TemplateController::class, 'setVariabel'])->middleware('auth');
 
 // InvitationTemplateController
 Route::get('/invitation-template', [InvitationTemplateController::class, 'listTemplate'])->middleware('auth');

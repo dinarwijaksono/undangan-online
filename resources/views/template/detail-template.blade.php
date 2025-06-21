@@ -35,8 +35,10 @@
                 </tbody>
             </table>
 
-            <div class="flex justify-end">
-                <button class="btn btn-sm btn-warning mr-2">preview</button>
+            <div class="flex justify-end gap-2">
+                <a href="/template/set-variabel/asldkfj" class="btn btn-sm btn-primary mr-2">Atur variabel</a>
+                <a class="btn btn-sm btn-warning mr-2">preview</a>
+                <a href="/template" class="btn btn-sm btn-error text-white mr-2">Kembali</a>
             </div>
         </section>
 
