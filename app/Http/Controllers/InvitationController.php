@@ -16,9 +16,11 @@ class InvitationController extends Controller
         return view('invitation.select-template');
     }
 
-    public function createInvitation()
+    public function createInvitation(string $code)
     {
-        return view('/invitation/create-invitation');
+        $data['code'] = $code;
+
+        return view('invitation.create-invitation', $data);
     }
 
     public function editInvitation()
