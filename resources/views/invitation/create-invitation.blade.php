@@ -7,27 +7,31 @@
         <section class="py-4 px-8 bg-base-100 rounded">
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Nama kamu</legend>
-                <input type="text" class="input w-full" placeholder="Type here" />
+                <input type="text" class="input input-sm w-full" placeholder="Type here" />
             </fieldset>
 
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Nama pasanganmu</legend>
-                <input type="text" class="input w-full" placeholder="Type here" />
+                <input type="text" class="input input-sm w-full" placeholder="Type here" />
+            </fieldset>
+
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Slug</legend>
+                <label class="input input-sm w-full">
+                    <span class="label">https://momen-indah.com/</span>
+                    <input type="text" placeholder="URL" />
+                </label>
             </fieldset>
 
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Tanggal menikah</legend>
-                <input type="date" class="input w-full" />
+                <input type="date" class="input input-sm w-full" />
             </fieldset>
 
             <div class="flex mt-8 justify-end gap-2">
-                <div class="basis-2/12">
-                    <button class="btn btn-error text-white w-full">Batal</button>
-                </div>
+                <a href="/invitation/my-invitation" class="btn w-2/12 btn-error btn-sm text-white">Batal</a>
 
-                <div class="basis-2/12">
-                    <button class="btn btn-primary w-full">Simpan</button>
-                </div>
+                <button class="btn w-2/12 btn-primary btn-sm ">Simpan</button>
             </div>
 
         </section>
