@@ -49,7 +49,7 @@ return [
 
         'public-custom' => [
             'driver' => 'local',
-            'root' => public_path('file'),
+            'root' => public_path('storage-custom'),
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
