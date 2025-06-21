@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('is_publish')->default(false);
             $table->date('event_at');
             $table->date('expired_at')->nullable();
+            $table->json('img_path')->nullable()->default('[]');
             $table->timestamps();
         });
     }

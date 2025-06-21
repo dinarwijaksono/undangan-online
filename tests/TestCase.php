@@ -15,8 +15,9 @@ abstract class TestCase extends BaseTestCase
 
         DB::delete('delete from users');
         DB::delete('delete from templates');
-
-        DB::delete('delete from themes');
-        DB::delete('delete from theme_variabels');
+        DB::delete('delete from template_variabels');
+        DB::delete('delete from invitations');
+        DB::delete('delete from invitation_variabels');
+        DB::delete('delete from rsvps');
     }
 }

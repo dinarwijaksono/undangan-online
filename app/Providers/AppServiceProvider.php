@@ -6,8 +6,6 @@ use App\Models\Theme;
 use App\Repositories\ThemeRepository;
 use App\Repositories\ThemeVariabelRepository;
 use App\Repositories\UserRepository;
-use App\RepositoryInterface\ThemeRepositoryInterface;
-use App\RepositoryInterface\ThemeVariabelRepositoryInterface;
 use App\RepositoryInterface\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,8 +17,6 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-        $this->app->bind(ThemeRepositoryInterface::class, ThemeRepository::class);
-        $this->app->bind(ThemeVariabelRepositoryInterface::class, ThemeVariabelRepository::class);
     }
 
     /**

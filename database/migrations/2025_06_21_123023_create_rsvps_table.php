@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('themes', function (Blueprint $table) {
+        Schema::create('rsvps', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 20)->unique();
+            $table->foreignId('invitation_id');
             $table->string('name', 100);
-            $table->boolean('is_publised')->default(false);
-            $table->string('filename');
+            $table->enum('status', ['presen', 'not sure', 'not presen']);
+            $table->string('content', 255);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('themes');
+        Schema::dropIfExists('rsvps');
     }
 };

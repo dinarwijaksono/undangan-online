@@ -24,12 +24,11 @@ class InvitationControllerTest extends TestCase
 
     public function test_view_set_variabel(): void
     {
-        $this->seed(CreateThemeSeeder::class);
-        $template = Theme::first();
+        $code = 'asldkf';
 
-        $_SERVER['REQUEST_URI'] = '/invitation-template/set-variabel/' . $template->code;
+        $_SERVER['REQUEST_URI'] = '/invitation-template/set-variabel/' . $code;
         $response = $this->actingAs($this->user)
-            ->get('/invitation-template/set-variabel/' . $template->code);
+            ->get('/template/set-variabel/' . $code);
 
         $response->assertStatus(200);
     }
