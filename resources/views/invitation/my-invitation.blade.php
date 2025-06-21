@@ -9,11 +9,11 @@
                 <!-- head -->
                 <thead>
                     <tr class="bg-warning text-slate-500 w-full">
-                        <th class="text-center w-1/12">No</th>
                         <th class="text-center w-3/12">Name</th>
                         <th class="text-center w-2/12">Dibuat</th>
+                        <th class="text-center w-2/12">Acara</th>
                         <th class="text-center w-2/12">Expired</th>
-                        <th class="text-center w-2/12">Status</th>
+                        <th class="text-center w-1/12">Status</th>
                         <th class="text-center w-2/12"></th>
                     </tr>
                 </thead>
@@ -21,8 +21,8 @@
                     @for ($i = 0; $i < 5; $i++)
                         <!-- row 1 -->
                         <tr class="hover:bg-sky-100">
-                            <td class="text-center">{{ $i + 1 }}</td>
                             <td>Aku & Kamu</td>
+                            <td class="text-center">12 Mei 2025</td>
                             <td class="text-center">12 Mei 2025</td>
                             <td class="text-center">12 Mei 2025</td>
                             <td class="text-center">
@@ -43,7 +43,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="flex gap-2">
+                                <div class="flex justify-baseline gap-2">
                                     <div class="basis-6/12">
                                         <button class="btn btn-sm w-full text-white btn-primary">Aktifkan</button>
                                     </div>

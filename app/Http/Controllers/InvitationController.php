@@ -8,7 +8,7 @@ class InvitationController extends Controller
 {
     public function myInvitation()
     {
-        return view('/invitation/my-invitation');
+        return view('invitation.my-invitation');
     }
 
     public function selectATheme()
