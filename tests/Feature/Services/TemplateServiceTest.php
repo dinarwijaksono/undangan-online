@@ -39,6 +39,24 @@ class TemplateServiceTest extends TestCase
         ]);
     }
 
+    public function test_find_by_code_failed_code_is_empty()
+    {
+        $response = $this->templateService->findByCode('alsdfkj');
+
+        $this->assertNull($response);
+    }
+
+    public function test_find_by_code_success()
+    {
+        $this->seed(CreateTemplateSeeder::class);
+        $template = Template::first();
+
+        $response = $this->templateService->findByCode($template->code);
+
+        $this->assertInstanceOf(Template::class, $response);
+        $this->assertEquals($response->code, $template->code);
+    }
+
     public function test_get_all()
     {
         $this->seed(CreateTemplateSeeder::class);
