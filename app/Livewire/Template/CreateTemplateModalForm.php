@@ -63,8 +63,9 @@ class CreateTemplateModalForm extends Component
 
         $this->file->storePubliclyAs('html', $fileName, 'public-custom');
 
-        $this->dispatch('to-close')->self();
+        $this->dispatch('do-close')->self();
         $this->dispatch('open-alert', "Template berhasil disimpan.")->to(AlertSuccess::class);
+        $this->dispatch('do-refresh')->to(ListTemplate::class);
     }
 
     public function render()

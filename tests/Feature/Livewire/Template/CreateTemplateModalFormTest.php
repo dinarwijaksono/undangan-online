@@ -4,6 +4,7 @@ namespace Tests\Feature\Livewire\Template;
 
 use App\Livewire\Components\AlertSuccess;
 use App\Livewire\Template\CreateTemplateModalForm;
+use App\Livewire\Template\ListTemplate;
 use App\Models\Template;
 use App\Models\User;
 use Database\Seeders\CreateUserSeeder;
@@ -65,8 +66,9 @@ class CreateTemplateModalFormTest extends TestCase
             ->set('name', 'contoh-nama-file')
             ->set('file', $file)
             ->call('save')
-            ->assertDispatched('to-close')
-            ->assertDispatchedTo(AlertSuccess::class, 'open-alert', 'Template berhasil disimpan.');
+            ->assertDispatched('do-close')
+            ->assertDispatchedTo(AlertSuccess::class, 'open-alert', 'Template berhasil disimpan.')
+            ->assertDispatchedTo(ListTemplate::class, 'do-refresh');
 
         $this->assertDatabaseHas('templates', [
             'name' => 'contoh-nama-file'

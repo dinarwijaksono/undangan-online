@@ -15,7 +15,8 @@ class CreateTemplateSeeder extends Seeder
     {
         Template::create([
             'code' => \Illuminate\Support\Str::random(10),
-            'name' => 'example name ' . mt_rand(1, 1000)
+            'name' => 'example name ' . mt_rand(1, 1000),
+            'html_path' => \Illuminate\Support\Str::random(10) . '.html'
         ]);
     }
 }
