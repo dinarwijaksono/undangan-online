@@ -23,8 +23,8 @@ class InvitationController extends Controller
         return view('invitation.create-invitation', $data);
     }
 
-    public function editInvitation()
+    public function editInvitation(string $slug)
     {
-        return view('/invitation/edit-invitation');
+        return view('invitation.edit-invitation');
     }
 }

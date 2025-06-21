@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="basis-6/12">
-                                        <a href="/invitation/edit-invitation"
+                                        <a href="/invitation/edit-invitation/asldkfj"
                                             class="btn btn-sm w-full text-white btn-secondary">Edit</a>
                                     </div>
                                 </div>
