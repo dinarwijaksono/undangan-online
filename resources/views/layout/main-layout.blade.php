@@ -7,6 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ env('APP_NAME') }}</title>
 
+    <!-- our project just needs Font Awesome Solid + Brands -->
+    <link href="/assets/fontawesome-free-6.7.2-web/css/fontawesome.css" rel="stylesheet" />
+    <link href="/assets/fontawesome-free-6.7.2-web/css/brands.css" rel="stylesheet" />
+    <link href="/assets/fontawesome-free-6.7.2-web/css/solid.css" rel="stylesheet" />
+    <link href="/assets/fontawesome-free-6.7.2-web/css/sharp-thin.css" rel="stylesheet" />
+    <link href="/assets/fontawesome-free-6.7.2-web/css/duotone-thin.css" rel="stylesheet" />
+    <link href="/assets/fontawesome-free-6.7.2-web/css/sharp-duotone-thin.css" rel="stylesheet" />
+
     @vite('resources/css/app.css')
 
 </head>

@@ -1,13 +1,13 @@
 <div role="alert" @class([
-    'alert alert-vertical alert-success text-white mb-5 sm:alert-horizontal rounded-xl shadow-lg',
+    'alert alert-vertical alert-success text-white mb-5 sm:alert-horizontal rounded shadow-lg relative',
     'hidden' => !$isOpen,
 ])>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-        class="stroke-info h-6 w-6 shrink-0 text-white">
-    </svg>
+    <i class="fa-solid fa-circle-check fa-2xl"></i>
     <div>
         <h3 class="font-bold">Success!</h3>
         <div class="text-xs">{{ $message }}</div>
     </div>
-    <button type="button" wire:click="setClose" class="btn btn-sm btn-primary">Tutup</button>
+    <button type="button" wire:click="setClose" class="absolute top-1 right-1">
+        <i class="fa-solid fa-rectangle-xmark text-white fa-xl"></i>
+    </button>
 </div>
