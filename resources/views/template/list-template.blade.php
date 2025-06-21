@@ -7,7 +7,7 @@
         @livewire('components.alert-success')
 
         <div class="flex justify-end mb-4">
-            <a class="btn btn-sm btn-primary">Tambah template</a>
+            @livewire('components.button-open-create-template')
         </div>
 
         @for ($i = 0; $i < 10; $i++)

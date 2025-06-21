@@ -27,8 +27,8 @@ class CreateTemplateModalForm extends Component
     public function getListeners()
     {
         return [
-            'to-open' => 'setOpen',
-            'to-close' => 'setClose'
+            'do-open' => 'setOpen',
+            'do-close' => 'setClose'
         ];
     }
 
