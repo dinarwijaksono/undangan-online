@@ -29,7 +29,7 @@
                 {{-- footer --}}
                 <div class="flex justify-end">
                     <a class="btn btn-sm btn-warning ml-2">Preview</a>
-                    <a class="btn btn-sm btn-primary ml-2">Detail template</a>
+                    <a href="/template/detail-template/lskadjf" class="btn btn-sm btn-primary ml-2">Detail template</a>
                 </div>
             </section>
         @endfor

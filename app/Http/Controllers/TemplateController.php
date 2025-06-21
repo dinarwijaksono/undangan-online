@@ -10,4 +10,9 @@ class TemplateController extends Controller
     {
         return view('template.list-template');
     }
+
+    public function detailTemplate(string $code)
+    {
+        return view('template.detail-template');
+    }
 }
