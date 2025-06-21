@@ -2,7 +2,18 @@
 
 @section('main-section')
     <main class="basis-10/12 px-4 bg-base-200 py-6">
-        <h1 class="text-3xl mb-5">Undanganku</h1>
+        <div class="flex">
+            <div class="basis-6/12">
+                <h1 class="text-2xl mb-5">Undanganku</h1>
+            </div>
+
+            <div class="basis-6/12 flex justify-end gap-2">
+                <button class="btn btn-sm btn-outline btn-success">Demo</button>
+
+                <button class="btn btn-sm btn-outline btn-success">Real</button>
+            </div>
+
+        </div>
 
         <div class="overflow-x-auto bg-base-100 shadow-lg rounded-xl">
             <table class="table w-full">
@@ -62,7 +73,7 @@
         </div>
 
         <div class="overflow-x-auto flex justify-center mt-8">
-            <a href="/invitation/select-a-theme" class="btn btn-secondary btn-sm w-5/12">Buat undangan baru</a>
+            <a href="/invitation/select-template" class="btn btn-secondary btn-sm w-5/12">Buat undangan baru</a>
         </div>
 
     </main>

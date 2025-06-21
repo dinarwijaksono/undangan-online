@@ -25,7 +25,7 @@ Route::get('/template/set-variabel/{code}', [TemplateController::class, 'setVari
 
 // InvitationController
 Route::get('/invitation/my-invitation', [InvitationController::class, 'myInvitation'])->middleware('auth');
-Route::get('/invitation/select-a-theme', [InvitationController::class, 'selectATheme'])->middleware('auth');
+Route::get('/invitation/select-template', [InvitationController::class, 'selectTemplate'])->middleware('auth');
 Route::get('/invitation/create-invitation', [InvitationController::class, 'createInvitation'])->middleware('auth');
 Route::get('/invitation/edit-invitation', [InvitationController::class, 'editInvitation'])->middleware('auth');
 

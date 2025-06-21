@@ -11,9 +11,9 @@ class InvitationController extends Controller
         return view('invitation.my-invitation');
     }
 
-    public function selectATheme()
+    public function selectTemplate()
     {
-        return view('/invitation/select-a-theme');
+        return view('invitation.select-template');
     }
 
     public function createInvitation()
