@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\TemplateService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class TemplateController extends Controller
@@ -22,7 +23,21 @@ class TemplateController extends Controller
 
     public function detailTemplate(string $code)
     {
-        return view('template.detail-template');
+        $template = $this->templateService->findByCode($code);
+
+        if (is_null($template)) {
+            Log::warning('redirect page from template/detail-template to template', [
+                'user_id' => auth()->user()->id,
+                'template_code' => $code
+            ]);
+
+            return redirect('/template');
+        }
+
+        $data['template'] = $template;
+        $data['code'] = $code;
+
+        return view('template.detail-template', $data);
     }
 
     public function setVariabel(string $code)

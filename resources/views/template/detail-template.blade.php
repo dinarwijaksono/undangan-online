@@ -1,52 +1,20 @@
-@extends('../layout/main-layout')
+@extends('layout.main-layout')
 
 @section('main-section')
     <main class="basis-10/12 px-4 bg-base-200 py-6">
-        <h1 class="text-3xl mb-5">Detail template</h1>
+        <div class="flex justify-between items-center">
+            <h1 class="text-3xl mb-5">Detail template</h1>
 
-        <section class="w-full bg-base-100 mb-5 p-6 rounded-xl shadow-lg">
-            <table class="table w-full">
-                <tbody>
-                    <tr>
-                        <td class="w-3/12">Nama template</td>
-                        <td class="w-1/12 text-center">:</td>
-                        <td class="w-8/12">Nama template</td>
-                    </tr>
+            <a href="/template" class="btn btn-sm btn-error text-white">Kembali</a>
+        </div>
 
-                    <tr>
-                        <td>Status</td>
-                        <td class="text-center">:</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary">Publis</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Dibuat</td>
-                        <td class="text-center">:</td>
-                        <td>10:11, 10 november 2025</td>
-                    </tr>
-
-                    <tr>
-                        <td>Diupdate</td>
-                        <td class="text-center">:</td>
-                        <td>10:11, 10 november 2025</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="flex justify-end gap-2">
-                <a href="/template/set-variabel/asldkfj" class="btn btn-sm btn-primary mr-2">Atur variabel</a>
-                <a class="btn btn-sm btn-warning mr-2">preview</a>
-                <a href="/template" class="btn btn-sm btn-error text-white mr-2">Kembali</a>
-            </div>
-        </section>
+        @livewire('template.description-template-section', ['template' => $template])
 
         <section class="w-full bg-base-100 mb-5 p-6 rounded-xl shadow-lg">
             <h2 class="text-xl mb-5">kode html</h2>
 
             <div class="mb-2">
-                <textarea class="bg-slate-200 rounded-sm h-40 w-full p-2">Lorem ipsum, dolor sit amet consectetur adipisicing.</textarea>
+                <textarea class="bg-slate-200 rounded-sm h-40 w-full p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, iure.</textarea>
             </div>
 
             <div class="flex justify-end">
