@@ -94,4 +94,22 @@ class TemplateServiceTest extends TestCase
 
         $this->assertFalse($response);
     }
+
+    public function test_update_asset_template_success()
+    {
+        $this->seed(CreateTemplateSeeder::class);
+        $template = Template::first();
+
+        $this->templateService->updateAssetTemplate($template->code, 'css', 'contoh.css');
+        $this->templateService->updateAssetTemplate($template->code, 'js', 'contoh.js');
+        $this->templateService->updateAssetTemplate($template->code, 'thumbnail', 'contoh.jpg');
+        $this->templateService->updateAssetTemplate($template->code, 'img', 'contoh.jpeg');
+
+        $template = Template::where('code', $template->code)->first();
+
+        $this->assertEquals(json_decode($template->css_path), ['contoh.css']);
+        $this->assertEquals(json_decode($template->js_path), ['contoh.js']);
+        $this->assertEquals(json_decode($template->thumbnail_path), ['contoh.jpg']);
+        $this->assertEquals(json_decode($template->img_path), ['contoh.jpeg']);
+    }
 }

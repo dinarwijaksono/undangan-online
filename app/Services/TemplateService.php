@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Template;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -120,6 +121,62 @@ class TemplateService
             ]);
 
             return false;
+        }
+    }
+
+    public function updateAssetTemplate(string $code, string $type, string $fileName): void
+    {
+        try {
+            $template = Template::where('code', $code)->first();
+
+            if ($type == 'css') {
+                $asset = json_decode($template->css_path);
+                $asset[] = $fileName;
+
+                Template::where('code', $code)->update([
+                    'css_path' => json_encode($asset),
+                    'updated_at' => Carbon::now()
+                ]);
+            } elseif ($type == 'js') {
+                $asset = json_decode($template->js_path);
+                $asset[] = $fileName;
+
+                Template::where('code', $code)->update([
+                    'js_path' => json_encode($asset),
+                    'updated_at' => Carbon::now()
+                ]);
+            } elseif ($type == 'thumbnail') {
+                $asset = json_decode($template->thumbnail_path);
+                $asset[] = $fileName;
+
+                Template::where('code', $code)->update([
+                    'thumbnail_path' => json_encode($asset),
+                    'updated_at' => Carbon::now()
+                ]);
+            } elseif ($type == 'img') {
+                $asset = json_decode($template->img_path);
+                $asset[] = $fileName;
+
+                Template::where('code', $code)->update([
+                    'img_path' => json_encode($asset),
+                    'updated_at' => Carbon::now()
+                ]);
+            }
+
+            Log::info('update asset template success', [
+                'user_id' => auth()->user()->id,
+                'template_code' => $code,
+                'asset_type' => $type,
+                'file_name' => $fileName
+            ]);
+        } catch (\Throwable $th) {
+            Log::info('update asset template failed', [
+                'user_id' => auth()->user()->id,
+                'template_code' => $code,
+                'asset_type' => $type,
+                'file_name' => $fileName,
+                'message' => $th->getMessage()
+            ]);
         }
     }
 }
