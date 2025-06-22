@@ -9,37 +9,13 @@
         </div>
 
         @livewire('components.alert-success')
+        @livewire('template.create-asset-template-modal-form', ['code' => $code])
 
         @livewire('template.description-template-section', ['template' => $template])
 
         @livewire('template.html-content-template-section', ['template' => $template])
 
-        <section class="w-full bg-base-100 mb-5 p-6 rounded-xl shadow-lg">
-            <div class="flex justify-between">
-                <h2 class="text-xl mb-5">css asset</h2>
-
-                <button class="btn btn-primary btn-sm">Tambah asset</button>
-            </div>
-
-            <section class="flex">
-                <div class="border basis-6/12 border-slate-300 p-2">style.css</div>
-                <div class="flex justify-end border basis-6/12 border-slate-300 p-2">
-                    <button class="btn btn-sm btn-error text-white">Hapus</button>
-                </div>
-            </section>
-
-            <section class="flex">
-                <div class="border basis-6/12 border-slate-300 p-2">style.css</div>
-                <div class="flex justify-end border basis-6/12 border-slate-300 p-2">
-                    <button class="btn btn-sm btn-error text-white">Hapus</button>
-                </div>
-            </section>
-
-            <section class="mt-4">
-                <textarea class="bg-slate-200 rounded-sm h-20 w-full"></textarea>
-            </section>
-
-        </section>
+        @livewire('template.list-asset-css-section', ['template' => $template])
 
         <section class="w-full bg-base-100 mb-5 p-6 rounded-xl shadow-lg">
             <div class="flex justify-between">
