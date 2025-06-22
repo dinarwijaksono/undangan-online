@@ -22,6 +22,7 @@ Route::get('/main', [ManagementController::class, 'index'])->middleware('auth');
 Route::get('/template', [TemplateController::class, 'listTemplate'])->middleware('auth');
 Route::get('/template/detail-template/{code}', [TemplateController::class, 'detailTemplate'])->middleware('auth');
 Route::get('/template/set-variabel/{code}', [TemplateController::class, 'setVariabel'])->middleware('auth');
+Route::get('/template/preview/{code}', [TemplateController::class, 'preview'])->middleware('auth');
 
 // InvitationController
 Route::get('/invitation/my-invitation', [InvitationController::class, 'myInvitation'])->middleware('auth');

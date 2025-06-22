@@ -24,7 +24,8 @@
 
             {{-- footer --}}
             <div class="flex justify-end">
-                <a class="btn btn-sm btn-warning ml-2">Preview</a>
+                <a href="/template/preview/{{ $key->code }}" target="_blank"
+                    class="btn btn-sm btn-warning ml-2">Preview</a>
                 <a href="/template/detail-template/{{ $key->code }}" class="btn btn-sm btn-primary ml-2">Detail
                     template</a>
             </div>
