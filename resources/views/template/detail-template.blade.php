@@ -8,20 +8,11 @@
             <a href="/template" class="btn btn-sm btn-error text-white">Kembali</a>
         </div>
 
+        @livewire('components.alert-success')
+
         @livewire('template.description-template-section', ['template' => $template])
 
-        <section class="w-full bg-base-100 mb-5 p-6 rounded-xl shadow-lg">
-            <h2 class="text-xl mb-5">kode html</h2>
-
-            <div class="mb-2">
-                <textarea class="bg-slate-200 rounded-sm h-40 w-full p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, iure.</textarea>
-            </div>
-
-            <div class="flex justify-end">
-                <button class="btn btn-sm btn-warning mr-2">Upload file</button>
-                <button class="btn btn-sm btn-primary">simpan perubahan</button>
-            </div>
-        </section>
+        @livewire('template.html-content-template-section', ['template' => $template])
 
         <section class="w-full bg-base-100 mb-5 p-6 rounded-xl shadow-lg">
             <div class="flex justify-between">
