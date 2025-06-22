@@ -6,6 +6,7 @@ use App\Models\Template;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class TemplateService
@@ -93,6 +94,32 @@ class TemplateService
             ]);
 
             return null;
+        }
+    }
+
+    public function updateContentHtml(string $fileName, string $content): bool
+    {
+        try {
+            if (!Storage::disk('public-custom')->exists("html/$fileName")) {
+                throw new \Exception("File tidak ditemukan");
+            }
+
+            Log::info('update content html success', [
+                'user_id' => auth()->user()->id,
+                'file_name' => $fileName
+            ]);
+
+            Storage::disk('public-custom')->put("html/$fileName", $content);
+
+            return true;
+        } catch (\Throwable $th) {
+            Log::error('update content html failed', [
+                'user_id' => auth()->user()->id,
+                'file_name' => $fileName,
+                'message_error' => $th->getMessage()
+            ]);
+
+            return false;
         }
     }
 }

@@ -10,6 +10,7 @@ use Database\Seeders\CreateUserSeeder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class TemplateServiceTest extends TestCase
@@ -67,5 +68,30 @@ class TemplateServiceTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals(3, $response->count());
+    }
+
+    public function test_update_content_html_success()
+    {
+        $fileName = \Illuminate\Support\Str::random(10) . '.html';
+
+        Storage::disk('public-custom')->put("html/$fileName", 'abcd');
+
+        $file = Storage::disk('public-custom')->get("html/$fileName");
+
+        $this->assertEquals('abcd', $file);
+
+        $response = $this->templateService->updateContentHtml($fileName, 'ini kalimat baru');
+
+        $this->assertTrue($response);
+
+        $file = Storage::disk('public-custom')->get("html/$fileName");
+        $this->assertEquals('ini kalimat baru', $file);
+    }
+
+    public function test_update_content_html_but_file_not_exist()
+    {
+        $response = $this->templateService->updateContentHtml('file-ini-tidak-ada', 'ini kalimat baru');
+
+        $this->assertFalse($response);
     }
 }
