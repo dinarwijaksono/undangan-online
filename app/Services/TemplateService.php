@@ -170,7 +170,61 @@ class TemplateService
                 'file_name' => $fileName
             ]);
         } catch (\Throwable $th) {
-            Log::info('update asset template failed', [
+            Log::error('update asset template failed', [
+                'user_id' => auth()->user()->id,
+                'template_code' => $code,
+                'asset_type' => $type,
+                'file_name' => $fileName,
+                'message' => $th->getMessage()
+            ]);
+        }
+    }
+
+    public function deleteAssetTemplate(string $code, string $type, string $fileName): void
+    {
+        try {
+            $template = Template::where('code', $code)->first();
+
+            if ($type == 'css') {
+                $asset = json_decode($template->css_path);
+
+                $assetNew = [];
+                for ($i = 0; $i < count($asset); $i++) {
+                    if ($fileName != $asset[$i]) {
+                        $assetNew[] = $asset[$i];
+                    }
+                }
+
+                Template::where('code', $code)->update([
+                    'css_path' => json_encode($assetNew),
+                    'updated_at' => Carbon::now()
+                ]);
+            }
+
+            if ($type == 'js') {
+                $asset = json_decode($template->js_path);
+
+                $assetNew = [];
+                for ($i = 0; $i < count($asset); $i++) {
+                    if ($fileName != $asset[$i]) {
+                        $assetNew[] = $asset[$i];
+                    }
+                }
+
+                Template::where('code', $code)->update([
+                    'js_path' => json_encode($assetNew),
+                    'updated_at' => Carbon::now()
+                ]);
+            }
+
+            Log::info('delete asset template success', [
+                'user_id' => auth()->user()->id,
+                'template_code' => $code,
+                'asset_type' => $type,
+                'file_name' => $fileName
+            ]);
+        } catch (\Throwable $th) {
+            Log::error('delete asset template failed', [
                 'user_id' => auth()->user()->id,
                 'template_code' => $code,
                 'asset_type' => $type,

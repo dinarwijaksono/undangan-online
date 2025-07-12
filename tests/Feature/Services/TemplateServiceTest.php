@@ -112,4 +112,21 @@ class TemplateServiceTest extends TestCase
         $this->assertEquals(json_decode($template->thumbnail_path), ['contoh.jpg']);
         $this->assertEquals(json_decode($template->img_path), ['contoh.jpeg']);
     }
+
+
+    public function test_delete_asset_template_success()
+    {
+        $this->seed(CreateTemplateSeeder::class);
+        $template = Template::first();
+
+        $this->templateService->updateAssetTemplate($template->code, 'css', 'contoh.css');
+        $this->templateService->updateAssetTemplate($template->code, 'js', 'contoh.js');
+
+        $this->templateService->deleteAssetTemplate($template->code, 'css', 'contoh.css');
+        $this->templateService->deleteAssetTemplate($template->code, 'js', 'contoh.js');
+
+        $template = Template::where('code', $template->code)->first();
+        $this->assertEquals(json_decode($template->css_path), []);
+        $this->assertEquals(json_decode($template->js_path), []);
+    }
 }
