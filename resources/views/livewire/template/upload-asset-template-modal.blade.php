@@ -33,4 +33,14 @@
         </div>
     </section>
 
+    <script src="/assets/sweetalert/sweetalert.js"></script>
+    <script>
+        window.addEventListener('show-alert-upload-asset-success', event => {
+            Swal.fire({
+                title: 'Berhasil',
+                text: "Asset berhasil diupload.",
+                icon: 'success',
+            })
+        })
+    </script>
 </div>

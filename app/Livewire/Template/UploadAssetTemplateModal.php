@@ -8,7 +8,7 @@ use Livewire\Component;
 use Illuminate\Validation\Rule;
 use Livewire\WithFileUploads;
 
-class CreateAssetTemplateModalForm extends Component
+class UploadAssetTemplateModal extends Component
 {
     use WithFileUploads;
 
@@ -70,11 +70,12 @@ class CreateAssetTemplateModalForm extends Component
 
         $this->file = '';
         $this->dispatch('do-close')->self();
-        $this->dispatch('open-alert', "Asset berhasil ditambahkan.")->to(AlertSuccess::class);
+        $this->dispatch('show-alert-upload-asset-success');
+        $this->dispatch('do-refresh')->to(ListAssetCssSection::class);
     }
 
     public function render()
     {
-        return view('livewire.template.create-asset-template-modal-form');
+        return view('livewire.template.upload-asset-template-modal');
     }
 }

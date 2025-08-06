@@ -34,7 +34,7 @@ class ListAssetCssSection extends Component
 
     public function openModalCreateAsset()
     {
-        $this->dispatch('do-open')->to(CreateAssetTemplateModalForm::class);
+        $this->dispatch('do-open')->to(UploadAssetTemplateModal::class);
     }
 
     public function doDeleteCss(string $fileName)

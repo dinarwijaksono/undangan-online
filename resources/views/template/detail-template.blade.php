@@ -9,7 +9,7 @@
         </div>
 
         @livewire('components.alert-success')
-        @livewire('template.create-asset-template-modal-form', ['code' => $code])
+        @livewire('template.upload-asset-template-modal', ['code' => $code])
 
         @livewire('template.description-template-section', ['template' => $template])
 
