@@ -9,7 +9,8 @@
         <section class="flex border-b border-slate-300">
             <div class="basis-6/12 p-2">{{ $asset[$i] }}</div>
             <div class="flex justify-end basis-6/12  p-2">
-                <button class="btn btn-sm btn-error text-white">Hapus</button>
+                <button type="button" wire:click="doDeleteCss('{{ $asset[$i] }}')"
+                    class="btn btn-sm btn-error text-white">Hapus</button>
             </div>
         </section>
     @endfor
@@ -18,4 +19,17 @@
         <textarea class="textarea bg-slate-200 h-20 w-full">{{ $script }}</textarea>
     </section>
 
+    <script src="/assets/sweetalert/sweetalert.js"></script>
+    <script>
+        window.addEventListener('show-delete-asset-success', event => {
+            Swal.fire({
+                title: 'Berhasil',
+                text: "Asset berhasil di hapus",
+                icon: 'success',
+                didClose: () => {
+                    Livewire.dispatch('do-refresh')
+                }
+            })
+        })
+    </script>
 </section>

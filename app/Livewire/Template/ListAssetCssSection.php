@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Template;
 
+use App\Services\TemplateService;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class ListAssetCssSection extends Component
@@ -23,9 +25,27 @@ class ListAssetCssSection extends Component
         }
     }
 
+    public function getListeners()
+    {
+        return [
+            'do-refresh' => 'boot'
+        ];
+    }
+
     public function openModalCreateAsset()
     {
         $this->dispatch('do-open')->to(CreateAssetTemplateModalForm::class);
+    }
+
+    public function doDeleteCss(string $fileName)
+    {
+        $templateService = app()->make(TemplateService::class);
+
+        Storage::disk('public-custom')->delete("css/$fileName");
+
+        $templateService->deleteAssetTemplate($this->template->code, 'css', $fileName);
+
+        $this->dispatch('show-delete-asset-success');
     }
 
     public function render()
