@@ -1,4 +1,5 @@
 <div>
+
     @foreach ($templates as $key)
         <section class="w-full bg-base-100 mb-5 p-4 rounded-xl shadow-lg">
             <div class="flex justify-between">
@@ -11,7 +12,7 @@
                 </h2>
             </div>
 
-            <div class="flex mb-2">
+            <div class="flex mb-2 max-w-full">
                 <div class="border border-slate-400 h-44 w-32 bg-slate-100 m-2">
                 </div>
 
@@ -31,5 +32,6 @@
             </div>
         </section>
     @endforeach
+
 
 </div>

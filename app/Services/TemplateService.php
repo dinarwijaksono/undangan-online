@@ -48,7 +48,7 @@ class TemplateService
                     'id',
                     'code',
                     'name',
-                    'thumbnail_path',
+                    'cover_path',
                     'html_path',
                     'css_path',
                     'js_path',
@@ -79,7 +79,7 @@ class TemplateService
     public function getAll(): ?Collection
     {
         try {
-            $template = Template::select('id', 'code', 'name', 'thumbnail_path', 'is_publish', 'created_at', 'updated_at')
+            $template = Template::select('id', 'code', 'name', 'cover_path', 'is_publish', 'created_at', 'updated_at')
                 ->orderByDesc('created_at')
                 ->get();
 
@@ -145,12 +145,12 @@ class TemplateService
                     'js_path' => json_encode($asset),
                     'updated_at' => Carbon::now()
                 ]);
-            } elseif ($type == 'thumbnail') {
-                $asset = json_decode($template->thumbnail_path);
+            } elseif ($type == 'cover') {
+                $asset = json_decode($template->cover_path);
                 $asset[] = $fileName;
 
                 Template::where('code', $code)->update([
-                    'thumbnail_path' => json_encode($asset),
+                    'cover_path' => json_encode($asset),
                     'updated_at' => Carbon::now()
                 ]);
             } elseif ($type == 'img') {

@@ -8,11 +8,7 @@
 
         <fieldset class="fieldset mb-4">
             <legend class="fieldset-legend">Type</legend>
-            <select wire:model="type" class="select select-sm w-full">
-                <option selected>--Pilih--</option>
-                <option value="css">css</option>
-                <option value="js">js</option>
-            </select>
+            <input type="text" wire:model="type" class="input input-sm w-full font-semibold" disabled />
             @error('type')
                 <p class="label text-error italic">{{ $message }}</p>
             @enderror

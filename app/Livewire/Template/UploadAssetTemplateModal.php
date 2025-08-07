@@ -28,8 +28,8 @@ class UploadAssetTemplateModal extends Component
     public function getRules()
     {
         return [
-            'type' => ['required', Rule::in(['css', 'js'])],
-            'file' => 'required|extensions:css,js'
+            'type' => ['required', Rule::in(['cover', 'img', 'css', 'js'])],
+            'file' => 'required|extensions:css,js,jpg,jpeg,png'
         ];
     }
 
@@ -43,7 +43,6 @@ class UploadAssetTemplateModal extends Component
 
     public function setClose()
     {
-        $this->type = '';
         $this->file = '';
         $this->isOpen = false;
     }
@@ -57,13 +56,13 @@ class UploadAssetTemplateModal extends Component
     {
         $this->validate();
 
-        if ($this->type != $this->file->getclientoriginalextension()) {
-            $this->addError('file', 'Extension file tidak sesuai dengan type yang dipilih.');
+        if ($this->type == 'cover' && !in_array(strtolower($this->file->getclientoriginalextension()), ['png', 'jpg', 'jpeg'])) {
+            $this->addError('file', "Extension untuk cover harus jpg, jpeg, png.");
 
             return;
         }
 
-        $fileName = \Illuminate\Support\Str::random(10) . '.' . $this->type;
+        $fileName = \Illuminate\Support\Str::random(10) . '.' . strtolower($this->file->getclientoriginalextension());
 
         $this->templateService->updateAssetTemplate($this->code, $this->type, $fileName);
         $this->file->storePubliclyAs($this->type, $fileName, 'public-custom');

@@ -40,6 +40,13 @@ class TemplateController extends Controller
         return view('template.detail-template', $data);
     }
 
+    public function setCover(string $code)
+    {
+        $data['code'] = $code;
+
+        return view('template.set-cover', $data);
+    }
+
     public function setVariabel(string $code)
     {
         $data['code'] = $code;

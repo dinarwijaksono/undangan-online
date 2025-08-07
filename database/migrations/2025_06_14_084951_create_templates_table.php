@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code', 10)->unique();
             $table->string('name', 100);
-            $table->json('thumbnail_path')->nullable()->default('[]');
+            $table->json('cover_path')->nullable()->default('[]');
             $table->string('html_path', 20)->nullable()->unique();
             $table->json('css_path')->nullable()->default('[]');
             $table->json('js_path')->nullable()->default('[]');

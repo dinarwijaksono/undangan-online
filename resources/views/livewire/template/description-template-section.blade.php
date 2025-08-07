@@ -35,6 +35,7 @@
 
     <div class="flex justify-end gap-2">
         <a href="/template/set-variabel/{{ $template->code }}" class="btn btn-sm btn-primary mr-2">Atur variabel</a>
+        <a href="/template/set-cover/{{ $template->code }}" class="btn btn-sm btn-primary mr-2">Atur Cover</a>
         <a href="/template/preview/{{ $template->code }}" target="_blank"
             class="btn btn-sm btn-warning mr-2">preview</a>
     </div>
