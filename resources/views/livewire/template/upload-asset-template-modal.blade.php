@@ -18,7 +18,7 @@
             <legend class="fieldset-legend">File</legend>
             <input type="file" wire:model="file" class="file-input file-input-sm w-full" />
             @error('file')
-                <p class="label text-error italic">{{ $message }}</p>
+                <p class="label text-error text-md italic">{{ $message }}</p>
             @enderror
         </fieldset>
 

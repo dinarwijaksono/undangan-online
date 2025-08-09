@@ -9,7 +9,7 @@ class ListAssetCoverSection extends Component
 
     public function doShowModalUploadAsset()
     {
-        $this->dispatch('do-open')->to(UploadAssetTemplateModal::class);
+        $this->dispatch('do-open', type: 'cover')->to(UploadAssetTemplateModal::class);
     }
 
     public function render()

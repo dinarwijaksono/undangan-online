@@ -47,9 +47,10 @@ class UploadAssetTemplateModal extends Component
         $this->isOpen = false;
     }
 
-    public function setOpen()
+    public function setOpen(string $type)
     {
         $this->isOpen = true;
+        $this->type = $type;
     }
 
     public function save()
@@ -58,6 +59,12 @@ class UploadAssetTemplateModal extends Component
 
         if ($this->type == 'cover' && !in_array(strtolower($this->file->getclientoriginalextension()), ['png', 'jpg', 'jpeg'])) {
             $this->addError('file', "Extension untuk cover harus jpg, jpeg, png.");
+
+            return;
+        }
+
+        if ($this->type == 'css' && strtolower($this->file->getclientoriginalextension()) != 'css') {
+            $this->addError('file', "Extension untuk cover harus css.");
 
             return;
         }
