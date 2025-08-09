@@ -90,7 +90,7 @@ class TemplateControllerApiTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
-            ['code', 'name', 'thumbnail_path', 'is_publish', 'created_at', 'updated_at']
+            ['code', 'name', 'cover_path', 'is_publish', 'created_at', 'updated_at']
         ]);
         $response->assertJsonCount(3);
     }

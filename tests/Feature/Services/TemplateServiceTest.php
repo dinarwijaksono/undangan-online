@@ -102,14 +102,14 @@ class TemplateServiceTest extends TestCase
 
         $this->templateService->updateAssetTemplate($template->code, 'css', 'contoh.css');
         $this->templateService->updateAssetTemplate($template->code, 'js', 'contoh.js');
-        $this->templateService->updateAssetTemplate($template->code, 'thumbnail', 'contoh.jpg');
+        $this->templateService->updateAssetTemplate($template->code, 'cover', 'contoh.jpg');
         $this->templateService->updateAssetTemplate($template->code, 'img', 'contoh.jpeg');
 
         $template = Template::where('code', $template->code)->first();
 
         $this->assertEquals(json_decode($template->css_path), ['contoh.css']);
         $this->assertEquals(json_decode($template->js_path), ['contoh.js']);
-        $this->assertEquals(json_decode($template->thumbnail_path), ['contoh.jpg']);
+        $this->assertEquals(json_decode($template->cover_path), ['contoh.jpg']);
         $this->assertEquals(json_decode($template->img_path), ['contoh.jpeg']);
     }
 
