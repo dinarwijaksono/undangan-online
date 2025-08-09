@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class TemplateVariabelService
 {
-    public function store(int $templateId, string $name, string $type, string $defaultValue): ?TemplateVariabel
+    public function store(int $templateId, string $name, string $type, ?string $defaultValue): ?TemplateVariabel
     {
         $var = TemplateVariabel::create([
             'template_id' => $templateId,

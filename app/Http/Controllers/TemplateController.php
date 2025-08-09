@@ -49,9 +49,10 @@ class TemplateController extends Controller
 
     public function setVariabel(string $code)
     {
+        $data['template'] = $this->templateService->findByCode($code);
         $data['code'] = $code;
 
-        return view('template.set-variabel', $data);
+        return view('template.list-template-variabel', $data);
     }
 
     public function preview(string $code)
