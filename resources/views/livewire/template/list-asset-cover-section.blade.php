@@ -5,11 +5,18 @@
 
     <div class="grid grid-cols-4 gap-3">
 
-        <div class="flex items-end bg-slate-200 rounded h-80 p-2 shadow-xl">
-            <div class="flex justify-around w-full">
-                <button class="btn btn-xs btn-error text-white w-70/100">Hapus</button>
+        @for ($i = 0; $i < count($covers); $i++)
+            <div class="flex items-end rounded h-80 p-2 shadow-xl bg-slate-200"
+                style="
+                background: url('{{ env('APP_URL') . '/storage-custom/cover/' . $covers[$i] }}');
+                background-size: 100% auto;
+                background-repeat: no-repeat;
+                background-position: center center;">
+                <div class="flex justify-around w-full">
+                    <button class="btn btn-xs btn-error text-white w-70/100">Hapus</button>
+                </div>
             </div>
-        </div>
+        @endfor
 
         <div class="flex items-center bg-slate-200 hover:bg-slate-100 rounded h-80 p-2 shadow-xl">
             <div class="flex justify-center w-full">

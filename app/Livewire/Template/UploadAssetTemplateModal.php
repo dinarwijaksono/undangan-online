@@ -78,6 +78,7 @@ class UploadAssetTemplateModal extends Component
         $this->dispatch('do-close')->self();
         $this->dispatch('show-alert-upload-asset-success');
         $this->dispatch('do-refresh')->to(ListAssetCssSection::class);
+        $this->dispatch('do-refresh')->to(ListAssetCoverSection::class);
     }
 
     public function render()

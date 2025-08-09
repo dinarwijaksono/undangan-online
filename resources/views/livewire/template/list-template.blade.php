@@ -14,14 +14,21 @@
                 </div>
 
                 <div class="flex mb-2 max-w-full">
-                    <div class="border border-slate-400 h-44 w-32 bg-slate-100 m-2">
-                    </div>
 
-                    <div class="border border-slate-400 h-44 w-32 bg-slate-100 m-2">
-                    </div>
+                    @php
+                        $covers = json_decode($key->cover_path);
+                    @endphp
 
-                    <div class="border border-slate-400 h-44 w-32 bg-slate-100 m-2">
-                    </div>
+                    @for ($i = 0; $i < (count($covers) > 3 ? 3 : count($covers)); $i++)
+                        <div class="border border-slate-400 h-44 w-32 m-2"
+                            style="
+                            background: url('{{ env('APP_URL') . '/storage-custom/cover/' . $covers[$i] }}');
+                            background-size: 100% auto;
+                            background-position: center center;
+                            background-repeat: no-repeat;">
+                        </div>
+                    @endfor
+
                 </div>
 
                 {{-- footer --}}
